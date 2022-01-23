@@ -1,0 +1,157 @@
+.globe-header {
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-o {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-52%);
+  bottom: 3vh;
+}
+
+.timeline {
+  display: flex;
+  width: 43vw;
+  z-index: 100;
+}
+
+.timeline .icon-btn {
+  margin-right: 0.5rem;
+}
+
+.globe {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.zoom-info {
+  position: absolute;
+  left: 25%;
+  top: 10%;
+  color: #da8181;
+  opacity: 0;
+  z-index: 100;
+  transition: opacity 250ms ease-in-out;
+}
+
+.globe-map-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 43vw;
+  height: 43vw;
+}
+
+.core:hover .zoom-info {
+  opacity: 1;
+}
+
+.c-o {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  width: 88vw;
+  height: 88vw;
+
+  background-color: #2a0505;
+}
+
+.c-o::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  width: 97%;
+  height: 97%;
+
+  background-color: #180000;
+}
+
+.c-m {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  width: 70%;
+  height: 70%;
+
+  background-color: #200202;
+}
+
+.c-i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  width: 70%;
+  height: 70%;
+
+  overflow: hidden;
+
+  background-color: #180000;
+}
+
+.core {
+  width: 100%;
+  height: 100%;
+}
+
+.globe-map-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+
+  /* box-shadow: 0 0 0 7.5vw #200202, 0 0 0 16vw #180000, 0 0 0 17.1vw #2a0505; */
+}
+
+.selected-country-label {
+  font-size: 1.5rem;
+}
+
+.selected-country {
+  color: #cc3535;
+}
+
+.line-card {
+  position: absolute;
+  width: 19rem;
+  height: 17rem;
+  background-color: #611d1d;
+  border-radius: 1rem;
+  right: 3rem;
+}
+
+.line-card-top {
+  top: 3.5rem;
+}
+
+.line-card-bottom {
+  bottom: 2.5rem;
+}
+
+.latest-info {
+  color: #da8181;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.2rem;
+}

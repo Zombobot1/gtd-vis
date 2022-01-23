@@ -1,0 +1,31 @@
+.details {
+  width: 100vw;
+  padding-top: 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 3rem;
+}
+
+.details-header {
+  max-width: 93vw;
+  display: flex;
+  align-items: center;
+}
+
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.first-detailed-chart {
+  padding-bottom: 3rem;
+}
+
+.with-luv {
+  color: #da8181;
+}
+
+.with-luv .iconify {
+  width: 1rem;
+  transform: translateY(2px);
+}

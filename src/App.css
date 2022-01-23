@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  background-color: #180000;
+  color: #fff;
+}
+
+body {
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+text {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+h2 {
+  color: #cc3535;
+  font-size: 46px;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+}

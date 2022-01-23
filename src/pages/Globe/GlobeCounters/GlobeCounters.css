@@ -1,0 +1,83 @@
+.globe-attacks-info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.globe-attacks-info-i {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.globe-counters {
+  position: relative;
+  height: 234px;
+}
+
+.cards {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.iconify {
+  fill: #2a0505;
+}
+
+.count-label {
+  margin-bottom: 0.25rem;
+  color: #da8181;
+}
+
+.count-value {
+  font-weight: bold;
+}
+
+.icon-box {
+  padding: 0.8rem 1rem;
+  background-color: #cc3535;
+  border-radius: 16px;
+}
+
+.total-count,
+.affiliated-percentage,
+.unknown-percentage,
+.fatalities-count,
+.injuries-count,
+.casualties {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.total-count .iconify {
+  width: 32px;
+  transform: translateY(2px);
+}
+
+.affiliated-percentage .iconify {
+  width: 32px;
+  transform: translateY(2px);
+}
+
+.unknown-percentage .iconify {
+  width: 32px;
+  transform: translate(2px, 2px);
+}
+
+.casualties .iconify {
+  width: 32px;
+  transform: translateY(4px);
+}
+
+.fatalities-count .iconify {
+  width: 32px;
+  transform: translateY(4px) scale(1.2);
+}
+
+.injuries-count .iconify {
+  width: 32px;
+  transform: translateY(4px);
+}

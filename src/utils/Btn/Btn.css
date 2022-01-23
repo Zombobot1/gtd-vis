@@ -1,0 +1,20 @@
+.btn {
+  background-color: unset;
+  border: unset;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #cc3535;
+  transition: background-color 100ms ease-in-out;
+  color: #cc3535;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background-color: rgba(204, 53, 53, 0.1);
+}
+
+.btn:active {
+  background-color: rgba(204, 53, 53, 0.2);
+}

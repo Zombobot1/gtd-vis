@@ -1,0 +1,24 @@
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav.absolute {
+  position: absolute;
+  bottom: 2.5rem;
+}
+
+.nav-btn {
+  cursor: pointer;
+}
+
+.nav-btn .iconify {
+  width: 24px;
+  fill: #da8181;
+  color: #da8181; /* propagated through current color */
+}
+
+.nav-btn.active .iconify {
+  fill: #cc3535;
+  color: #cc3535;
+}
