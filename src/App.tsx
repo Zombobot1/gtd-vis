@@ -26,44 +26,11 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Details } from './pages/Details/Details'
 import { AnimatePresence, motion } from 'framer-motion'
 
+const base = process.env.NODE_ENV !== 'development' ? '/gtd-vis/' : ''
+
 function App() {
-  const [s, ss] = useState(false)
   return (
-    // <div>
-    //   <button onClick={() => ss((o) => !o)}>Suka</button>
-    //   <AnimatePresence exitBeforeEnter={true}>
-    //     <motion.div
-    //       key={'s' + s}
-    //       variants={sV}
-    //       initial="from"
-    //       animate="to"
-    //       exit="exit"
-    //       style={{ position: 'relative' }}
-    //     >
-    //       {s && (
-    //         <div
-    //           style={{
-    //             width: '10rem',
-    //             height: '10rem',
-    //             backgroundColor: 'red',
-    //             position: 'absolute',
-    //           }}
-    //         ></div>
-    //       )}
-    //       {!s && (
-    //         <div
-    //           style={{
-    //             width: '10rem',
-    //             height: '10rem',
-    //             backgroundColor: 'blue',
-    //             position: 'absolute',
-    //           }}
-    //         ></div>
-    //       )}
-    //     </motion.div>
-    //   </AnimatePresence>
-    // </div>
-    <BrowserRouter>
+    <BrowserRouter basename={base}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="globe" element={<Globe />} />
