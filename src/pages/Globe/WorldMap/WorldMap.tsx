@@ -1,10 +1,11 @@
 import { ResponsiveChoroplethCanvas, ResponsiveChoropleth } from '@nivo/geo'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { clamp, debounce, DivRef, throttle } from '../../../utils'
+import { clamp, debounce, DivRef, reverse, throttle } from '../../../utils'
 import './WorldMap.css'
 import { geoData } from '../data/geoData'
 import { geoFeatures } from './geoFeatures'
 import { colors } from '../../../theme'
+import useWindowSize from '../../../utils/hooks/useWindowSize'
 
 type Data = {
   id: string
@@ -20,7 +21,8 @@ export interface WorldMap {
 
 export function WorldMap({ data, onCountryClick }: WorldMap) {
   const ref = useRef<HTMLDivElement>(null)
-  const { translateX, translateY } = useTranslateByDrag(ref)
+  const { width } = useWindowSize()
+  const { lambda, phi } = useTranslateByDrag(ref)
   const scale = useScaleByWheel(ref)
 
   return (
@@ -29,14 +31,14 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
         data={data}
         features={geoFeatures.features}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-        colors={colors}
-        domain={[0, 1000000]}
+        colors={reverse(colors)}
+        domain={[0, 70]}
         unknownColor="#666666"
         label="properties.name"
-        valueFormat=".2s"
-        projectionTranslation={[translateX, translateY]}
-        projectionRotation={[0, 0, 0]}
-        projectionScale={scale} // 135
+        projectionType="orthographic"
+        projectionTranslation={[0.5, 0.5]}
+        projectionRotation={[lambda, phi, 0]}
+        projectionScale={width * scale}
         borderWidth={0.5}
         borderColor="#152538"
         onClick={(e) => onCountryClick(e.data.id)}
@@ -61,8 +63,8 @@ class Coordinates {
   initY = -1
   draggedX = 0
   draggedY = 0
-  translateX = 0.65
-  translateY = 0.6
+  lambda = -27 // +-180
+  phi = -14 // +-90
 }
 
 function useTranslateByDrag(ref: DivRef) {
@@ -79,8 +81,8 @@ function useTranslateByDrag(ref: DivRef) {
         ...old,
         draggedX: newDraggedX,
         draggedY: newDraggedY,
-        translateX: clamp(old.translateX + deltaX / 1e3, -1, 1),
-        translateY: clamp(old.translateY + deltaY / 1e3, -1, 1),
+        lambda: clamp(old.lambda + deltaX / 4, -180, 180),
+        phi: clamp(old.phi - deltaY / 8, -90, 90),
       }
     })
   }
@@ -97,10 +99,10 @@ function useTranslateByDrag(ref: DivRef) {
         initX: pageX,
         initY: pageY,
       }))
-      ref.current?.addEventListener('mousemove', onMouseMove)
+      window.addEventListener('mousemove', onMouseMove)
     }
 
-    const onMouseUp = () => ref.current?.removeEventListener('mousemove', onMouseMove)
+    const onMouseUp = () => window.removeEventListener('mousemove', onMouseMove)
 
     ref.current?.addEventListener('mousedown', onMouseDown)
     ref.current?.addEventListener('mouseup', onMouseUp)
@@ -112,14 +114,14 @@ function useTranslateByDrag(ref: DivRef) {
   }, [])
 
   return {
-    translateX: coordinates.translateX,
-    translateY: coordinates.translateY,
+    lambda: coordinates.lambda,
+    phi: coordinates.phi,
   }
 }
 
 class State {
   isShiftPressed = false
-  scale = 235
+  scale = 0.2135
 }
 
 function useScaleByWheel(ref: DivRef) {
@@ -141,7 +143,7 @@ function useScaleByWheel(ref: DivRef) {
     setScale((old) => {
       if (!old.isShiftPressed) return old
       const delta = Math.sign(e.deltaY)
-      return { ...old, scale: clamp(old.scale - delta * 10, 135, 400) }
+      return { ...old, scale: clamp(old.scale - delta / 1e2, 0.2135, 0.4) }
     })
   }
 

@@ -31,9 +31,9 @@ export function Details() {
         <h3>Most influential terrorist organizations</h3>
         <TerroristGroups />
       </motion.div>
-      <div className="with-luv">
+      <a className="with-luv" href="https://www.fu-berlin.de/en/index.html" target="_blank">
         From FU with <HeartI />
-      </div>
+      </a>
     </div>
   )
 }

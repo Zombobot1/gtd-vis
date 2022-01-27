@@ -36,13 +36,7 @@ export function CloseBtn({ onClick }: { onClick: () => void }) {
 
 const btnV: any = {
   hover: {
-    rotate: [0, 15, -15, 0],
-    transition: {
-      repeat: Infinity,
-      repeatType: 'reverse',
-      duration: 0.5,
-      type: 'tween',
-    },
+    scale: 1.3,
   },
   tap: {
     scale: 0.9,

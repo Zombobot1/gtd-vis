@@ -19,8 +19,9 @@ function AttacksChart({ data, legends }: AttacksChart_) {
         data={data}
         colors={[colorMap.lightYellow, colorMap.lightRed]}
         theme={theme}
-        curve="natural"
-        margin={{ top: 50, right: 30, bottom: 65, left: 65 }}
+        curve="catmullRom"
+        enableSlices="x"
+        margin={{ top: 50, right: 30, bottom: 45, left: 65 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -36,17 +37,11 @@ function AttacksChart({ data, legends }: AttacksChart_) {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'year',
-          legendOffset: 40,
-          legendPosition: 'middle',
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'count',
-          legendOffset: -45,
-          legendPosition: 'middle',
         }}
         enableGridX={false}
         enableGridY={false}
@@ -131,12 +126,11 @@ function AttackTypes({ data }: AttackTypes_) {
 }
 
 export interface VictimsOrAttacks {
-  showVictims: boolean
   data: AttackLineData
 }
 
-export function VictimsOrAttacks({ showVictims, data }: VictimsOrAttacks) {
-  return <AttacksChart data={data} legends={showVictims ? ['Fatalities', 'Injuries'] : ['Affiliated', 'Unknown']} />
+export function VictimsOrAttacks({ data }: VictimsOrAttacks) {
+  return <AttacksChart data={data} legends={['Fatalities', 'Injuries']} />
 }
 
 export interface CountryAttacksInfo {

@@ -30,7 +30,7 @@ export const throttle = (fn: Function, wait: number = 300) => {
 }
 
 export const debounce = <T extends (...args: any[]) => any>(callback: T, waitFor: number) => {
-  let timeout = 0
+  let timeout: NodeJS.Timeout
   return (...args: Parameters<T>): ReturnType<T> => {
     let result: any
     clearTimeout(timeout)
@@ -43,7 +43,7 @@ export const debounce = <T extends (...args: any[]) => any>(callback: T, waitFor
 
 export function copyTextToClipboard(text: string) {
   navigator.clipboard.writeText(text).then(
-    () => console.log('Async: Copying to clipboard was successful!'),
+    () => console.info('Async: Copying to clipboard was successful!'),
     (err) => console.error('Async: Could not copy text: ', err),
   )
 }
@@ -62,3 +62,4 @@ export type DivRef = React.RefObject<HTMLDivElement>
 
 const _sum = (p: number, v: any): number => p + v
 export const sum = <T>(arr: T[], f: (p: number, v: T) => number = _sum): number => arr.reduce(f, 0)
+export const reverse = <T>(array: T[]): T[] => array.map((_, idx) => array[array.length - 1 - idx])

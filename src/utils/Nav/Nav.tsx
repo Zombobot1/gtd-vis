@@ -14,10 +14,16 @@ export function Nav({ active, absolute = true }: Nav) {
   const navigate = useNavigate()
   return (
     <div className={'nav ' + (absolute ? 'absolute' : '')}>
-      <motion.div className="nav-btn" onClick={() => navigate('/')} variants={btnV} whileHover="hover" whileTap="tap">
+      <motion.button
+        className="nav-btn"
+        onClick={() => navigate('/')}
+        variants={btnV}
+        whileHover="hover"
+        whileTap="tap"
+      >
         <HomeI />
-      </motion.div>
-      <motion.div
+      </motion.button>
+      <motion.button
         className={'nav-btn ' + (active === 'map' ? 'active' : '')}
         onClick={() => navigate('/globe')}
         variants={btnV}
@@ -25,8 +31,8 @@ export function Nav({ active, absolute = true }: Nav) {
         whileTap="tap"
       >
         <WorldI />
-      </motion.div>
-      <motion.div
+      </motion.button>
+      <motion.button
         className={'nav-btn ' + (active === 'stat' ? 'active' : '')}
         onClick={() => navigate('/details')}
         variants={btnV}
@@ -34,20 +40,14 @@ export function Nav({ active, absolute = true }: Nav) {
         whileTap="tap"
       >
         <StatisticI />
-      </motion.div>
+      </motion.button>
     </div>
   )
 }
 
 const btnV: any = {
   hover: {
-    rotate: [0, 15, -15, 0],
-    transition: {
-      repeat: Infinity,
-      repeatType: 'reverse',
-      duration: 0.5,
-      type: 'tween',
-    },
+    scale: 1.2,
   },
   tap: {
     scale: 0.9,

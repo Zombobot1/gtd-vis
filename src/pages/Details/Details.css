@@ -23,6 +23,8 @@ h3 {
 
 .with-luv {
   color: #da8181;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .with-luv .iconify {

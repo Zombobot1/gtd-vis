@@ -8,7 +8,7 @@ import { ReactComponent as PatchI } from './patch.svg'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export interface GlobeCounters {
-  showVictims: boolean
+  showAttacks: boolean
   totalCount: number
   affiliated: number
   unknown: number
@@ -18,7 +18,7 @@ export interface GlobeCounters {
 }
 
 export function GlobeCounters({
-  showVictims,
+  showAttacks,
   fatalitiesCount,
   injuriesCount,
   unknown,
@@ -28,11 +28,11 @@ export function GlobeCounters({
 }: GlobeCounters) {
   return (
     <div>
-      <div className="latest-info">Overview</div>
+      <div className="latest-info">All Time Stats</div>
       <div className="globe-counters">
         <AnimatePresence>
-          <motion.div key={'' + showVictims} variants={sV} initial="from" animate="to" exit="exit">
-            {showVictims && (
+          <motion.div key={'' + showAttacks} variants={sV} initial="from" animate="to" exit="exit">
+            {showAttacks && (
               <div className="cards">
                 <div className="total-count">
                   <div className="icon-box">
@@ -49,7 +49,7 @@ export function GlobeCounters({
                   </div>
                   <div>
                     <div className="count-label">Affiliated</div>
-                    <div className="count-value">{percent(affiliated, affiliated + unknown)}</div>
+                    <div className="count-value">{percent(affiliated, totalCount)}</div>
                   </div>
                 </div>
                 <div className="unknown-percentage">
@@ -58,12 +58,12 @@ export function GlobeCounters({
                   </div>
                   <div>
                     <div className="count-label">Unknown</div>
-                    <div className="count-value">{percent(unknown, affiliated + unknown)}</div>
+                    <div className="count-value">{percent(unknown, totalCount)}</div>
                   </div>
                 </div>
               </div>
             )}
-            {!showVictims && (
+            {!showAttacks && (
               <div className="cards">
                 <div className="casualties">
                   <div className="icon-box">
@@ -80,7 +80,7 @@ export function GlobeCounters({
                   </div>
                   <div>
                     <div className="count-label">Killed</div>
-                    <div className="count-value">{fatalitiesCount}</div>
+                    <div className="count-value">{percent(fatalitiesCount, casualties)}</div>
                   </div>
                 </div>
                 <div className="injuries-count">
@@ -89,7 +89,7 @@ export function GlobeCounters({
                   </div>
                   <div>
                     <div className="count-label">Injured</div>
-                    <div className="count-value">{injuriesCount}</div>
+                    <div className="count-value">{percent(injuriesCount, casualties)}</div>
                   </div>
                 </div>
               </div>

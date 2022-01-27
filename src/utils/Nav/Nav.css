@@ -1,6 +1,6 @@
 .nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .nav.absolute {
@@ -9,7 +9,11 @@
 }
 
 .nav-btn {
+  background-color: unset;
+  border: unset;
   cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 100ms ease-in-out;
 }
 
 .nav-btn .iconify {

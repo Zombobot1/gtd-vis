@@ -11,10 +11,6 @@
   text-transform: uppercase;
 }
 
-.btn:hover {
-  background-color: rgba(204, 53, 53, 0.1);
-}
-
 .btn:active {
-  background-color: rgba(204, 53, 53, 0.2);
+  background-color: rgba(204, 53, 53, 0.1);
 }

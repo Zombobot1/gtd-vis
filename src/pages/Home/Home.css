@@ -4,12 +4,17 @@
   height: 100vh;
   padding-top: 3rem;
   padding-left: 5rem;
+  overflow: hidden;
 }
 
-.title {
+.title-o {
   position: relative;
-  display: flex;
   z-index: 1;
+}
+
+
+.title {
+  display: flex;
 }
 
 .gtd {
@@ -99,6 +104,11 @@ h1 {
 }
 
 img {
-  width: 48vw;
+  width: 52vw;
 }
-/* Rectangle 356 */
+
+@media screen and (min-height: 1000px) {
+  img {
+    width: 58vw;
+  }
+}

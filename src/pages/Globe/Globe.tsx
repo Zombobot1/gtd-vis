@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { AttackTypesLine, VictimsOrAttacks } from './CountryAttacksInfo/CountryAttacksInfo'
-import { CountyIdAndName } from '../../types'
+import { CountyIdAndName, gen } from '../../types'
 import { sum } from '../../utils'
 import { Btn } from '../../utils/Btn/Btn'
 import useInterval from '../../utils/hooks/useInterval'
@@ -36,6 +36,8 @@ export function Globe() {
     if (prevIsPlaying === false && isPlaying) setCurrentYearI(0)
   }, [isPlaying, prevIsPlaying])
 
+  gen()
+
   useInterval(
     () => {
       setCurrentYearI((old) => {
@@ -46,12 +48,10 @@ export function Globe() {
     isPlaying ? 1e3 : null,
   )
 
-  const [showVictims, setShowVictims] = useState(true)
+  const [showAttacks, setShowVictims] = useState(true)
 
   const worldMapData = geoData.find((d) => d.year === years[currentYearI])!.data
-  const lineData = showVictims
-    ? attacksData.find((d) => d.id === country)!.data
-    : victimsData.find((d) => d.id === country)!.data
+  const lineData = victimsData.find((d) => d.id === country)!.data
   const pieData = attackTypes.find((d) => d.id === country)!.data
 
   const { affiliated, total, unknown } = getAttacksInfo(country)
@@ -82,7 +82,7 @@ export function Globe() {
                 onCountryClick={(c) => {
                   setIsPlaying(false)
                   setCurrentYearI(years.length - 1)
-                  setCountry((old) => (!old ? 'RUS' : ''))
+                  setCountry(c)
                 }}
                 data={worldMapData}
               />
@@ -103,12 +103,16 @@ export function Globe() {
             affiliated={affiliated}
             fatalitiesCount={fatalities}
             injuriesCount={injuries}
-            showVictims={showVictims}
+            showAttacks={showAttacks}
             casualties={casualties}
             totalCount={total}
             unknown={unknown}
           />
-          <Btn text="Show on chart" onClick={() => setShowVictims((old) => !old)} />
+          <Btn
+            text={showAttacks ? 'Show Victims' : 'Show Attacks'}
+            onClick={() => setShowVictims((old) => !old)}
+            width={230}
+          />
         </motion.div>
       </div>
       <div className="timeline-o">
@@ -117,12 +121,17 @@ export function Globe() {
           <Slider points={years} currentIndexS={currentYearS} />
         </motion.div>
       </div>
-      <motion.div className="line-card line-card-top" variants={cardsV} initial="from" animate="to">
-        <VictimsOrAttacks showVictims={showVictims} data={lineData} />
-      </motion.div>
-      <motion.div className="line-card line-card-bottom" variants={cardsV} initial="from" animate="to">
-        <AttackTypesLine data={pieData} />
-      </motion.div>
+      <div className="globe-charts">
+        <div className="globe-charts-i">
+          <motion.div className="line-card line-card-top" variants={cardsV} initial="from" animate="to">
+            <VictimsOrAttacks data={lineData} />
+          </motion.div>
+          <motion.div className="line-card line-card-bottom" variants={cardsV} initial="from" animate="to">
+            <AttackTypesLine data={pieData} />
+          </motion.div>
+        </div>
+      </div>
+
       <Nav active="map" />
     </div>
   )
@@ -130,8 +139,8 @@ export function Globe() {
 
 function getAttacksInfo(country: string) {
   const data = attacksData.find((d) => d.id === country)!.data
-  const unknown = data.find((d) => d.id === 'fatalities')!.data // unknown
-  const affiliated = data.find((d) => d.id === 'injuries')!.data // affiliated
+  const unknown = data.find((d) => d.id === 'unknown')!.data
+  const affiliated = data.find((d) => d.id === 'affiliated')!.data
 
   const unknownCount = sum(unknown.map((p) => p.y))
   const affiliatedCount = sum(affiliated.map((p) => p.y))

@@ -26,11 +26,9 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Details } from './pages/Details/Details'
 import { AnimatePresence, motion } from 'framer-motion'
 
-const base = process.env.NODE_ENV !== 'development' ? '/gtd-vis/' : ''
-
 function App() {
   return (
-    <BrowserRouter basename={base}>
+    <BrowserRouter basename="/gtd-vis/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="globe" element={<Globe />} />
@@ -38,24 +36,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   )
-}
-
-const sV = {
-  from: {
-    opacity: 0,
-    x: 32,
-    transition: { duration: 0.5 },
-  },
-  to: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5 },
-  },
-  exit: {
-    opacity: 0,
-    x: -32,
-    transition: { duration: 0.5 },
-  },
 }
 export default App
 

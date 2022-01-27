@@ -20,14 +20,6 @@
   transition: background-color 100ms ease-in-out;
 }
 
-.icon-btn:hover {
-  background-color: rgba(204, 53, 53, 0.1);
-}
-
-.icon-btn:active {
-  background-color: rgba(204, 53, 53, 0.2);
-}
-
 .close-btn {
   /* transform: translateY(-6px); */
   margin-left: 0.25rem;

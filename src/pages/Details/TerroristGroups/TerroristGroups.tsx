@@ -9,6 +9,8 @@ export function TerroristGroups() {
       <ResponsiveLine
         data={groupsData}
         theme={bigTheme}
+        curve="catmullRom"
+        enableSlices="x"
         margin={{ top: 50, right: 30, bottom: 70, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{
@@ -19,14 +21,13 @@ export function TerroristGroups() {
           reverse: false,
         }}
         yFormat=" >-.2f"
-        curve="natural"
         axisTop={null}
         axisRight={null}
         axisBottom={{
           tickSize: 5,
           tickPadding: 12,
           tickRotation: 0,
-          legend: 'transportation',
+          legend: 'Year',
           legendOffset: 56,
           legendPosition: 'middle',
         }}
@@ -34,7 +35,7 @@ export function TerroristGroups() {
           tickSize: 5,
           tickPadding: 12,
           tickRotation: 0,
-          legend: 'count',
+          legend: 'Attack number',
           legendOffset: -70,
           legendPosition: 'middle',
         }}
