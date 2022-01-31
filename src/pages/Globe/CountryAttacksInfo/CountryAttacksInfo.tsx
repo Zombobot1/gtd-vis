@@ -21,33 +21,36 @@ function AttacksChart({ data, legends }: AttacksChart_) {
         theme={theme}
         curve="catmullRom"
         enableSlices="x"
-        margin={{ top: 50, right: 30, bottom: 45, left: 65 }}
+        margin={{ top: 50, right: 30, bottom: 55, left: 65 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
           max: 'auto',
-          stacked: true,
+          stacked: false,
           reverse: false,
         }}
         yFormat=" >-.2f"
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          tickSize: 5,
-          tickPadding: 5,
+          tickSize: 3,
+          tickPadding: 2,
           tickRotation: 0,
+          tickValues: [2011,2013,2015,2017,2019],
           legend: 'Year',
           legendPosition: 'middle',
           legendOffset: 30,
         }}
         axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
+          tickSize: 3,
+          tickPadding: 2,
           tickRotation: 0,
-          legend: 'Number of Attacks',
-          legendOffset: -56,
+          legend: 'Numbers(T)',
+          tickValues: 5,
+          legendOffset: -40,
           legendPosition: 'middle',
+          format: e => e / 1000,
         }}
         enableGridX={false}
         enableGridY={false}
@@ -70,7 +73,7 @@ function AttacksChart({ data, legends }: AttacksChart_) {
             itemDirection: 'left-to-right',
             itemWidth: 80,
             itemHeight: 20,
-            symbolSize: 14,
+            symbolSize:10,
             symbolShape: 'circle',
             data: [
               { id: '2', label: legends[0], color: colorMap.lightYellow },
