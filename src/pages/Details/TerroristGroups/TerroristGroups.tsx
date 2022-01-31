@@ -15,7 +15,7 @@ export function TerroristGroups() {
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
-          min: 'auto',
+          min: '0',
           max: 'auto',
           stacked: true,
           reverse: false,

@@ -68,16 +68,13 @@ export function Home() {
 
       <main>
         <motion.div initial="from" animate="to" exit="from" variants={mainV} className="hero">
-          <h1>Fight Terrorist Activity</h1>
-          <p className="text">Analyse terrorist attacks over the time to choose optimal strategy for preventing them</p>
+          <h1>Exploring Global Terrorist Attacks</h1>
+          <p className="text">Analysing trends over years in types, terrorist groups, numbers of terrorist attacks are analysed, that could enable governments, policy makers, researchers, analysts extrapolating the useful information from the attacks where they happened in past.</p>
           <Btn className="cta" text="Explore data" onClick={() => navigate('globe')} width={270} />
         </motion.div>
       </main>
 
       <motion.div initial="from" animate="to" exit="from" variants={boiV}>
-        <div className="boi-container">
-          <img src={scaryBoi} alt={'scaryBoi'} />
-        </div>
       </motion.div>
     </div>
   )

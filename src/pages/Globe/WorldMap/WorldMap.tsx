@@ -34,6 +34,7 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
         colors={reverse(colors)}
         domain={[0, 400]}
         unknownColor="#2e0000"
+        valueFormat=".2s"
         label="properties.name"
         projectionType="orthographic"
         projectionTranslation={[0.5, 0.5]}
@@ -42,6 +43,18 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
         borderWidth={0.5}
         borderColor="#152538"
         onClick={(e) => onCountryClick(e.data.id)}
+        legends={[
+          {
+            anchor: 'bottom-right',
+            justify: false,
+            direction: 'column',
+            itemDirection: 'left-to-right',
+            itemWidth: 100,
+            itemHeight: 10,
+            translateX: -120,
+            translateY: -50,
+          },
+        ]}
         tooltip={(e) => {
           return (
             <Tooltip

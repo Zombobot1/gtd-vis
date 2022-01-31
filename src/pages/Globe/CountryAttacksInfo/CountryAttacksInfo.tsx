@@ -37,11 +37,17 @@ function AttacksChart({ data, legends }: AttacksChart_) {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
+          legend: 'Year',
+          legendPosition: 'middle',
+          legendOffset: 30,
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
+          legend: 'Number of Attacks',
+          legendOffset: -56,
+          legendPosition: 'middle',
         }}
         enableGridX={false}
         enableGridY={false}
