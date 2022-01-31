@@ -26,8 +26,8 @@ Terrorist attacks have massive economic and psycological effect on wide range of
 In our study, we contacted with a researher who working in thinktank which conducts the projects in areas of foreign and security policy or international and European politics. With regarding the needs of our target user(user group) various cases are determined. 
 
 1. The change in number of attacks over years both for global and country based, that would help them to take an overview about the state of last 10 years.
-2. Compare and finding correlation between the fatalities and injuries with number of attacks in order to understand whether a country has improvement in their intelligence service. Mostly attacks have a design to target crowds such as after exploding the bombs in first stage, to the points where people escape, another set of bombs are placed, even some of attacks had third stage with weapons.
-3. The change in target type, that give insights for future attacks and which type of user groups are vulnerable.
+2. Comparing and finding correlation between the fatalities and injuries with number of attacks in order to understand whether a country has improvement in their intelligence service. Mostly attacks have a design to target crowds such as after exploding the bombs in first stage, to the points where people escape, another set of bombs are placed, even some of attacks had third stage with weapons.
+3. The change in frequently used attack type, that give insights for future attacks to take precaution against these types.
 4. Comparing the affiliated and unknown attacks of most attacked countries over years in an effort to have an idea about intelligence service of countries. Affiliated attacks which were carried out by groups were identified by government, however unknown attacks were not.
 5. Inspecting the activities of most influential terrorist groups over years. Influential can be described as having much more attacks that were carried out.
 
@@ -42,7 +42,7 @@ After preparing first prototype, we have interviewed with our user and evaluate 
 In this context, we have transformed the dashboard into accommodately the need of users. Therefore data became more structured and approptiate to load them faster on user interface. The data was filtered out of last 10 years, selected only necessary fields and aggreagated with regarding to the case study. For each specific case, new dataset is structured with required filters. All dataset are described in below.
 
 - **Affiliated and non-affiliated groups over years:** year, country, id(code of country to be used in map), affiliation(indicator if group is unknown or has a name), unique count of events, sum of number of killed people, sum of number of wounded people
-- **Target type over years:**  year, country, id(code of country to be used in map), target type, unique count of events, sum of number of killed people, sum of number of wounded people
+- **Attack type over years:**  year, country, id(code of country to be used in map), attack type, unique count of events, sum of number of killed people, sum of number of wounded people
 - **The numbers of injured and killed people over years:** year, country, id(code of country to be used in map), unique count of events, sum of number of killed people, sum of number of wounded people 
 - **The most influential terrorist groups over years:** year, country, id(code of country to be used in map), group name, unique count of events, sum of number of killed people, sum of number of wounded people
 
