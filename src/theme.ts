@@ -30,7 +30,14 @@ export const colors = [
   // colorMap.blue,
 ]
 
-export const pieColors = [colorMap.darkRed, colorMap.red, colorMap.orange, colorMap.lightOrange]
+export const pieColors = [
+  colorMap.darkRed,
+  colorMap.red,
+  colorMap.orange,
+  colorMap.lightRed,
+  colorMap.lightOrange,
+  colorMap.lightYellow,
+]
 
 export const theme = {
   textColor: '#333333',

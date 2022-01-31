@@ -95,6 +95,7 @@ function AttackTypes({ data }: AttackTypes_) {
           data={data}
           theme={theme}
           colors={pieColors}
+          // colors={{ scheme: 'nivo' }}
           margin={{ top: 30, right: -10, bottom: 20, left: 0 }}
           innerRadius={0.85}
           padAngle={2}
