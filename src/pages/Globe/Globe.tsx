@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { AttackTypesLine, VictimsOrAttacks } from './CountryAttacksInfo/CountryAttacksInfo'
+import { AttackTypesPie, VictimsOrAttacks } from './CountryAttacksInfo/CountryAttacksInfo'
 import { CountyIdAndName, gen } from '../../types'
 import { sum } from '../../utils'
 import { Btn } from '../../utils/Btn/Btn'
@@ -127,7 +127,7 @@ export function Globe() {
             <VictimsOrAttacks data={lineData} />
           </motion.div>
           <motion.div className="line-card line-card-bottom" variants={cardsV} initial="from" animate="to">
-            <AttackTypesLine data={pieData} />
+            <AttackTypesPie data={pieData} />
           </motion.div>
         </div>
       </div>
