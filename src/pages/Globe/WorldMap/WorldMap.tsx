@@ -32,8 +32,8 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
         features={geoFeatures.features}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         colors={reverse(colors)}
-        domain={[0, 70]}
-        unknownColor="#666666"
+        domain={[0, 400]}
+        unknownColor="#2e0000"
         label="properties.name"
         projectionType="orthographic"
         projectionTranslation={[0.5, 0.5]}

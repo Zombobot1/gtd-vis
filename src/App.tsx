@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ResponsiveChoroplethCanvas } from '@nivo/geo'
 import { WorldMap } from './pages/Globe/WorldMap/WorldMap'
 import {
-  AttackTypesLine,
+  AttackTypesPie,
   CountryAttacksInfo,
   VictimsOrAttacks,
 } from './pages/Globe/CountryAttacksInfo/CountryAttacksInfo'

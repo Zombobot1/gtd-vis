@@ -137,6 +137,6 @@ export interface CountryAttacksInfo {
   data: AttackPieData
 }
 
-export function AttackTypesLine({ data }: CountryAttacksInfo) {
+export function AttackTypesPie({ data }: CountryAttacksInfo) {
   return <AttackTypes data={data} />
 }
