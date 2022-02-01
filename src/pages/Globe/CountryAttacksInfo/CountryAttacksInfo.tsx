@@ -15,13 +15,15 @@ interface AttacksChart_ {
 function AttacksChart({ data, legends }: AttacksChart_) {
   return (
     <div className="line">
+    <p className="y-label">Numbers(T)</p>
+    <p className="x-label">Year</p>
       <ResponsiveLine
         data={data}
         colors={[colorMap.lightYellow, colorMap.lightRed]}
         theme={theme}
         curve="catmullRom"
         enableSlices="x"
-        margin={{ top: 50, right: 30, bottom: 55, left: 65 }}
+        margin={{ top: 60, right: 45, bottom: 45, left: 45 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -38,19 +40,13 @@ function AttacksChart({ data, legends }: AttacksChart_) {
           tickPadding: 2,
           tickRotation: 0,
           tickValues: [2011,2013,2015,2017,2019],
-          legend: 'Year',
-          legendPosition: 'middle',
-          legendOffset: 30,
         }}
         axisLeft={{
           tickSize: 3,
           tickPadding: 2,
           tickRotation: 0,
-          legend: 'Numbers(T)',
           tickValues: 5,
-          legendOffset: -40,
-          legendPosition: 'middle',
-          format: e => e / 1000,
+          format: e => e/1000 ,
         }}
         enableGridX={false}
         enableGridY={false}
@@ -64,11 +60,11 @@ function AttacksChart({ data, legends }: AttacksChart_) {
         useMesh={true}
         legends={[
           {
-            anchor: 'top-left',
+            anchor: 'top-right',
             direction: 'row',
             justify: false,
-            translateX: -33,
-            translateY: -32,
+            translateX: 33,
+            translateY: -52,
             itemsSpacing: 16,
             itemDirection: 'left-to-right',
             itemWidth: 80,

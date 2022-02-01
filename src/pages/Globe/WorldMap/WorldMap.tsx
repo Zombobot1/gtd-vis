@@ -51,7 +51,7 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
             itemDirection: 'left-to-right',
             itemWidth: 100,
             itemHeight: 10,
-            translateX: -120,
+            translateX: -180,
             translateY: -50,
           },
         ]}
