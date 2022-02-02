@@ -3,6 +3,18 @@
   gap: 1.25rem;
 }
 
+@media screen and (max-width: 600px) {
+  .nav {
+    position: fixed;
+    padding: 0.5rem 2rem;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid #3c0b0b;
+    background-color: #180000;
+  }
+}
+
 .nav.absolute {
   position: absolute;
   bottom: 2.5rem;
@@ -14,12 +26,17 @@
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 100ms ease-in-out;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-btn .iconify {
   width: 24px;
   fill: #da8181;
   color: #da8181; /* propagated through current color */
+}
+
+.help-i {
+  transform: scale(1.1);
 }
 
 .nav-btn.active .iconify {

@@ -2,20 +2,26 @@ import './Nav.css'
 import { ReactComponent as HomeI } from './home.svg'
 import { ReactComponent as WorldI } from './world.svg'
 import { ReactComponent as StatisticI } from './statistic.svg'
-import { useNavigate } from 'react-router-dom'
+import { ReactComponent as HelpI } from './question.svg'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 export interface Nav {
-  active?: 'map' | 'stat'
   absolute?: boolean
 }
 
-export function Nav({ active, absolute = true }: Nav) {
+export function Nav({ absolute = true }: Nav) {
   const navigate = useNavigate()
+  const location = useLocation()
+  const mobile = useIsMobile()
+  let active = ''
+  if (location.pathname.includes('globe')) active = 'map'
+  else if (location.pathname.includes('details')) active = 'stat'
   return (
-    <div className={'nav ' + (absolute ? 'absolute' : '')}>
+    <div className={'nav ' + (absolute && !mobile ? 'absolute' : '')}>
       <motion.button
-        className="nav-btn"
+        className={'nav-btn ' + (active === '' ? 'active' : '')}
         onClick={() => navigate('/')}
         variants={btnV}
         whileHover="hover"
@@ -40,6 +46,15 @@ export function Nav({ active, absolute = true }: Nav) {
         whileTap="tap"
       >
         <StatisticI />
+      </motion.button>
+      <motion.button
+        className={'nav-btn '}
+        onClick={() => navigate('/details')}
+        variants={btnV}
+        whileHover="hover"
+        whileTap="tap"
+      >
+        <HelpI />
       </motion.button>
     </div>
   )

@@ -6,4 +6,8 @@ import svgrPlugin from 'vite-plugin-svgr'
 export default defineConfig({
   base: '/gtd-vis/',
   plugins: [react(), svgrPlugin()],
+  server: {
+    open: true,
+    host: '0.0.0.0',
+  },
 })

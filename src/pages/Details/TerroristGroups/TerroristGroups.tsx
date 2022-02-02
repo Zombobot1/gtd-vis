@@ -2,6 +2,7 @@ import './TerroristGroups.css'
 import { ResponsiveLine } from '@nivo/line'
 import { groupsData } from './groupsData'
 import { colorMap, theme } from '../../../theme'
+import { generate } from '../../../utils'
 
 export function TerroristGroups() {
   return (
@@ -36,8 +37,9 @@ export function TerroristGroups() {
           tickPadding: 12,
           tickRotation: 0,
           legend: 'Attack number',
-          legendOffset: -70,
+          legendOffset: -75,
           legendPosition: 'middle',
+          tickValues: generate(8, (i) => (i + 1) * 400),
         }}
         enableGridX={false}
         enableGridY={false}

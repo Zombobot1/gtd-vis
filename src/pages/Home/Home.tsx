@@ -4,6 +4,12 @@ import { ReactComponent as ShieldI } from './shield.svg'
 import scaryBoi from './scaryBoi.webp'
 import { useNavigate } from 'react-router-dom'
 import { animate, motion } from 'framer-motion'
+import { ResponsiveChoroplethCanvas } from '@nivo/geo'
+import { useState } from 'react'
+import useWindowSize from '../../utils/hooks/useWindowSize'
+import useInterval from '../../utils/hooks/useInterval'
+import { geoFeatures } from '../Globe/WorldMap/geoFeatures'
+import { useTimeout } from '../../utils/hooks/useTimeout'
 
 const titleV = {
   from: {
@@ -41,6 +47,24 @@ const mainV = {
 
 export function Home() {
   const navigate = useNavigate()
+  const scale = 0.55 / 2
+  const scaleDelta = 0
+  const [lambda, setLambda] = useState(7)
+  const [phi, setPhi] = useState(8)
+  const { width } = useWindowSize()
+  const [rotating, setRotating] = useState(false)
+  const speed = width > 600 ? 1 : 3
+  useInterval(
+    () => {
+      setLambda((o) => o - 0.05 * speed)
+      setPhi((o) => o - (0.05 / 2) * speed)
+    },
+    rotating ? 41 : null,
+  )
+
+  useTimeout(() => {
+    setRotating(true)
+  }, 500)
 
   return (
     <div className="home">
@@ -68,15 +92,28 @@ export function Home() {
 
       <main>
         <motion.div initial="from" animate="to" exit="from" variants={mainV} className="hero">
-          <h1>Fight Terrorist Activity</h1>
-          <p className="text">Analyse terrorist attacks over the time to choose optimal strategy for preventing them</p>
+          <h1>Explore Terrorist Activity</h1>
+          <p className="text">Get insights from the data to help policy makers with choosing optimal countermeasures</p>
           <Btn className="cta" text="Explore data" onClick={() => navigate('globe')} width={270} />
         </motion.div>
       </main>
 
       <motion.div initial="from" animate="to" exit="from" variants={boiV}>
-        <div className="boi-container">
-          <img src={scaryBoi} alt={'scaryBoi'} />
+        <div className="ball-o">
+          <div className="ball">
+            <ResponsiveChoroplethCanvas
+              data={[]}
+              features={geoFeatures.features}
+              domain={[0, 400]}
+              unknownColor="#180000"
+              projectionType="orthographic"
+              projectionTranslation={[0.5, 0.5]}
+              projectionRotation={[lambda, phi, 0]}
+              projectionScale={width * (scale + scaleDelta)}
+              borderWidth={width > 600 ? 2 : 1}
+              borderColor="#cc3535"
+            />
+          </div>
         </div>
       </motion.div>
     </div>

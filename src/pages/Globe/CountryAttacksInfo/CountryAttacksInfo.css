@@ -1,6 +1,15 @@
 .line {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.y-label {
+  position: absolute;
+}
+
+.x-label {
+  position: absolute;
 }
 
 .attacks-info {

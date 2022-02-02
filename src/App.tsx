@@ -1,6 +1,6 @@
 import './App.css'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ResponsiveChoroplethCanvas } from '@nivo/geo'
+import { ResponsiveChoropleth, ResponsiveChoroplethCanvas } from '@nivo/geo'
 import { WorldMap } from './pages/Globe/WorldMap/WorldMap'
 import {
   AttackTypesPie,
@@ -25,15 +25,23 @@ import { Home } from './pages/Home/Home'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Details } from './pages/Details/Details'
 import { AnimatePresence, motion } from 'framer-motion'
+import { geoFeatures } from './pages/Globe/WorldMap/geoFeatures'
+import useWindowSize from './utils/hooks/useWindowSize'
+import { useIsMobile } from './utils/hooks/useIsMobile'
+import { Nav } from './utils/Nav/Nav'
 
 function App() {
+  const mobile = useIsMobile()
   return (
     <BrowserRouter basename="/gtd-vis/">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="globe" element={<Globe />} />
-        <Route path="details" element={<Details />} />
-      </Routes>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="globe" element={<Globe />} />
+          <Route path="details" element={<Details />} />
+        </Routes>
+        {mobile && <Nav />}
+      </div>
     </BrowserRouter>
   )
 }

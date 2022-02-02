@@ -63,3 +63,7 @@ export type DivRef = React.RefObject<HTMLDivElement>
 const _sum = (p: number, v: any): number => p + v
 export const sum = <T>(arr: T[], f: (p: number, v: T) => number = _sum): number => arr.reduce(f, 0)
 export const reverse = <T>(array: T[]): T[] => array.map((_, idx) => array[array.length - 1 - idx])
+export const sort = <T>(arr: T[], toNum: (element: T) => number = (e) => e as unknown as number): T[] => {
+  arr.sort((a, b) => toNum(a) - toNum(b))
+  return arr
+}

@@ -1,11 +1,13 @@
 import { ResponsiveChoroplethCanvas, ResponsiveChoropleth } from '@nivo/geo'
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { clamp, debounce, DivRef, reverse, throttle } from '../../../utils'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { clamp, debounce, DivRef, equalNum, reverse, throttle } from '../../../utils'
 import './WorldMap.css'
 import { geoData } from '../data/geoData'
 import { geoFeatures } from './geoFeatures'
 import { colors } from '../../../theme'
 import useWindowSize from '../../../utils/hooks/useWindowSize'
+import { useIsMobile } from '../../../utils/hooks/useIsMobile'
+import { useGesture } from '@use-gesture/react'
 
 type Data = {
   id: string
@@ -21,12 +23,14 @@ export interface WorldMap {
 
 export function WorldMap({ data, onCountryClick }: WorldMap) {
   const ref = useRef<HTMLDivElement>(null)
-  const { width } = useWindowSize()
-  const { lambda, phi } = useTranslateByDrag(ref)
+  const { width, height } = useWindowSize()
+  const { lambda, phi } = useGestureTransformations(ref)
   const scale = useScaleByWheel(ref)
+  let scaleDelta = height >= 1080 ? HIGH_SCREEN_DELTA : 0
+  if (width <= 600) scaleDelta = MOBILE_SCREEN_DELTA
 
   return (
-    <div className="map" ref={ref}>
+    <div className="map">
       <ResponsiveChoropleth
         data={data}
         features={geoFeatures.features}
@@ -37,8 +41,10 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
         label="properties.name"
         projectionType="orthographic"
         projectionTranslation={[0.5, 0.5]}
-        projectionRotation={[lambda, phi, 0]}
-        projectionScale={width * scale}
+        // projectionRotation={[lambda, phi, 0]} -78.3720703125, phi: 38.65283203125,
+        projectionRotation={[-80, 37, 0]}
+        // projectionScale={width * (scale + scaleDelta)}
+        projectionScale={400}
         borderWidth={0.5}
         borderColor="#152538"
         onClick={(e) => onCountryClick(e.data.id)}
@@ -63,8 +69,8 @@ class Coordinates {
   initY = -1
   draggedX = 0
   draggedY = 0
-  lambda = -27 // +-180
-  phi = -14 // +-90
+  lambda = -27
+  phi = -14
 }
 
 function useTranslateByDrag(ref: DivRef) {
@@ -119,9 +125,14 @@ function useTranslateByDrag(ref: DivRef) {
   }
 }
 
+const SCALE = 0.205 // 0.2135 .9 * .65 * .7 / 2
+const HIGH_SCREEN_DELTA = 0.27 - SCALE
+const MOBILE_SCREEN_DELTA = 0.437 - SCALE
+const MAX_SCALE = 0.5
+
 class State {
   isShiftPressed = false
-  scale = 0.2135
+  scale = SCALE
 }
 
 function useScaleByWheel(ref: DivRef) {
@@ -143,7 +154,7 @@ function useScaleByWheel(ref: DivRef) {
     setScale((old) => {
       if (!old.isShiftPressed) return old
       const delta = Math.sign(e.deltaY)
-      return { ...old, scale: clamp(old.scale - delta / 1e2, 0.2135, 0.4) }
+      return { ...old, scale: clamp(old.scale - delta / 1e2, SCALE, MAX_SCALE) }
     })
   }
 
@@ -163,6 +174,45 @@ function useScaleByWheel(ref: DivRef) {
   return scale.scale
 }
 
+type Drag = { offset: number[] }
+
+function useGestureTransformations(ref: DivRef) {
+  const [dragged, setDragged] = useState({ dx: 0, dy: 0, lambda: -27, phi: -14, active: true })
+  const [pinched, setPinched] = useState('')
+  console.log(dragged)
+  const onDrag = useCallback(
+    throttle(({ offset: [dx, dy] }: Drag) => {
+      setDragged((old) => {
+        if (!old.active) return old
+        const lambda = clamp(old.lambda + (dx - old.dx) / 4, -180, 180)
+        const phi = clamp(old.phi - (dy - old.dy) / 8, -90, 90)
+        // lambda: -72.728515625, phi: 31.65771484375
+        // lambda: -39.9384765625, phi: -0.28466796875
+        // lambda: -46.4482421875, phi: 7.48046875,
+        return { ...old, lambda, phi, dx, dy }
+      })
+    }, 10),
+    [],
+  )
+
+  useGesture(
+    {
+      onDrag,
+      onWheel: ({ movement }) => {
+        setPinched(`y: ${Math.round(movement[1])}`)
+      },
+      onPinchStart: () => setDragged((old) => ({ ...old, active: false })),
+      onPinchEnd: () => setDragged((old) => ({ ...old, active: true })),
+      onPinch: ({ movement }) => {
+        setPinched(`y: ${Math.round(movement[1])}`)
+      },
+    },
+    { target: ref, drag: { threshold: 10 } },
+  )
+
+  return { lambda: dragged.lambda, phi: dragged.phi }
+}
+
 interface TooltipP {
   color: string
   country: string
@@ -172,6 +222,8 @@ interface TooltipP {
 }
 
 function Tooltip({ color, country, killed, value, wounded }: TooltipP) {
+  const mobile = useIsMobile()
+  if (mobile) return null
   return (
     <div className="tooltip">
       <div className="tooltip-circle" style={{ backgroundColor: color }} />

@@ -7,11 +7,17 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 600px) {
+  .home {
+    padding-top: 2rem;
+    padding-left: 2rem;
+  }
+}
+
 .title-o {
   position: relative;
   z-index: 1;
 }
-
 
 .title {
   display: flex;
@@ -20,9 +26,20 @@
 .gtd {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
   margin-right: 25rem;
+}
+
+@media screen and (max-width: 600px) {
+  .gtd {
+    font-size: 1rem;
+  }
+
+  .gtd > .iconify {
+    width: 24px;
+  }
 }
 
 .navigation {
@@ -61,8 +78,17 @@ main {
   position: absolute;
   top: 50%;
   left: 5rem;
-  max-width: 30vw;
+  max-width: 35vw;
   transform: translateY(-50%);
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    margin-top: 2rem;
+    position: static;
+    max-width: 80vw;
+    transform: none;
+  }
 }
 
 .hero {
@@ -88,27 +114,30 @@ h1 {
   width: 15rem;
 }
 
-.boi-container {
+.ball-o {
   position: absolute;
-  /* transform: scale(1.2); */
-  right: 0;
-  top: 0;
+  bottom: -20%;
+  right: -10%;
+
+  width: 55vw;
+  height: 55vw;
 }
 
-.boi-container::before {
-  position: absolute;
-  content: '';
+.ball {
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(24, 0, 0, 0.1) 0%, rgba(204, 53, 53, 0.1) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4vw #200202;
 }
 
-img {
-  width: 52vw;
+@media screen and (min-height: 1080px) {
+  .ball-o {
+    bottom: -10%;
+  }
 }
 
-@media screen and (min-height: 1000px) {
-  img {
-    width: 58vw;
+@media screen and (max-width: 600px) {
+  .ball-o {
+    bottom: 0%;
   }
 }

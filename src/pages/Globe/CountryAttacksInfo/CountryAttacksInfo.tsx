@@ -6,15 +6,19 @@ import { ResponsivePie } from '@nivo/pie'
 import { attackTypes } from '../data/attackTypes'
 import { colorMap, colors, pieColors, theme } from '../../../theme'
 import { AttackLineData, AttackPieData } from '../../../types'
+import { sort } from '../../../utils'
 
 interface AttacksChart_ {
   data: AttackLineData
   legends: string[]
+  globeShown: boolean
 }
 
-function AttacksChart({ data, legends }: AttacksChart_) {
+function AttacksChart({ data, legends, globeShown }: AttacksChart_) {
   return (
     <div className="line">
+      <p className="y-label">Numbers(T)</p>
+      <p className="x-label">year</p>
       <ResponsiveLine
         data={data}
         colors={[colorMap.lightYellow, colorMap.lightRed]}
@@ -95,7 +99,6 @@ function AttackTypes({ data }: AttackTypes_) {
           data={data}
           theme={theme}
           colors={pieColors}
-          // colors={{ scheme: 'nivo' }}
           margin={{ top: 30, right: -10, bottom: 20, left: 0 }}
           innerRadius={0.85}
           padAngle={2}
@@ -128,10 +131,11 @@ function AttackTypes({ data }: AttackTypes_) {
 
 export interface VictimsOrAttacks {
   data: AttackLineData
+  globeShown: boolean
 }
 
-export function VictimsOrAttacks({ data }: VictimsOrAttacks) {
-  return <AttacksChart data={data} legends={['Fatalities', 'Injuries']} />
+export function VictimsOrAttacks({ data, globeShown }: VictimsOrAttacks) {
+  return <AttacksChart data={data} legends={['Fatalities', 'Injuries']} globeShown={globeShown} />
 }
 
 export interface CountryAttacksInfo {

@@ -8,9 +8,49 @@
   padding-right: 3rem;
 }
 
+@media screen and (max-width: 600px) {
+  .globe {
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .globe > h2 {
+    margin-bottom: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
 .globe-header {
   position: relative;
   z-index: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .globe-header {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+}
+
+.back-to-globe {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-to-globe > .iconify {
+  width: 32px;
+  transition: transform 200ms ease-in-out;
+}
+
+.back-to-globe:hover > .iconify {
+  transform: translateX(-12%);
 }
 
 .globe-attacks-info {
@@ -62,8 +102,7 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
 
-  width: 88vw;
-  height: 88vw;
+  /* set in js */
 
   background-color: #2a0505;
 }
@@ -89,10 +128,24 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
 
-  width: 70%;
-  height: 70%;
+  width: 65%;
+  height: 65%;
 
   background-color: #200202;
+}
+
+@media screen and (min-height: 1080px) {
+  .c-m {
+    width: 75%;
+    height: 75%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .c-m {
+    width: 110vw;
+    height: 110vw;
+  }
 }
 
 .c-i {
@@ -108,6 +161,20 @@
   overflow: hidden;
 
   background-color: #180000;
+}
+
+@media screen and (min-height: 1080px) {
+  .c-i {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .c-i {
+    width: 80%;
+    height: 80%;
+  }
 }
 
 .core {
@@ -139,13 +206,33 @@
   position: absolute;
   left: 50%;
   transform: translateX(-52%);
-  bottom: 3vh;
+  bottom: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .timeline-o {
+    bottom: 3.5rem;
+  }
 }
 
 .timeline {
   display: flex;
   width: 43vw;
   z-index: 100;
+}
+
+@media screen and (min-height: 1080px) {
+  .timeline {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .timeline {
+    width: 100vw;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
 }
 
 .timeline .icon-btn {
