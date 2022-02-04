@@ -62,7 +62,9 @@ Example for tables:
 
 This project represents a visualization of data from a large dataset of terrorist attacks from 1977 to 2019 (over 200,000 rows and over 70 columns).
 Based on user requirements, the data for visualization was limited to 2011-2019.
-In order to reduce computational complexity and provide a fast response of the application, a separate set of data was prepared in the required analytics for each visualization.
+In order to reduce computational complexity and provide a fast response of the application, a separate set of data was prepared in the required analytics for each visualization (See Data Abstraction section).
+
+In order to ensure fast application response and comfortable user interaction with the app, we refused the tools that we used in the first prototype (plotly, dash) and implemented visualization in javascript using specialized libraries [nivo.rocks](https://nivo.rocks/). We have run a lot of tests to check the app's responsiveness and ergonomics, as well as the ease of presentation of information on various devices.
 
 
 ## Running the Application <a name="running-the-application"></a>
