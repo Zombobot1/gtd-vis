@@ -59,6 +59,12 @@ Example for tables:
 
 ### Algorithm Design <a name="algorithm-design"></a>
 
+
+This project represents a visualization of data from a large dataset of terrorist attacks from 1977 to 2019 (over 200,000 rows and over 70 columns).
+Based on user requirements, the data for visualization was limited to 2011-2019.
+In order to reduce computational complexity and provide a fast response of the application, a separate set of data was prepared in the required analytics for each visualization.
+
+
 ## Running the Application <a name="running-the-application"></a>
 
 In order to run this application on your computer and make changes on the project, you should run these steps which are stated below sequentially.
