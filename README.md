@@ -26,8 +26,8 @@ Terrorist attacks have massive economic and psycological effect on wide range of
 In our study, we contacted with a researher who working in thinktank which conducts the projects in areas of foreign and security policy or international and European politics. With regarding the needs of our target user(user group) various cases are determined. 
 
 1. The change in number of attacks over years both for global and country based, that would help them to take an overview about the state of last 10 years.
-2. Compare and finding correlation between the fatalities and injuries with number of attacks in order to understand whether a country has improvement in their intelligence service. Mostly attacks have a design to target crowds such as after exploding the bombs in first stage, to the points where people escape, another set of bombs are placed, even some of attacks had third stage with weapons.
-3. The change in target type, that give insights for future attacks and which type of user groups are vulnerable.
+2. Comparing and finding correlation between the fatalities and injuries with number of attacks in order to understand whether a country has improvement in their intelligence service. Mostly attacks have a design to target crowds such as after exploding the bombs in first stage, to the points where people escape, another set of bombs are placed, even some of attacks had third stage with weapons.
+3. The change in frequently used attack type, that give insights for future attacks to take precaution against these types.
 4. Comparing the affiliated and unknown attacks of most attacked countries over years in an effort to have an idea about intelligence service of countries. Affiliated attacks which were carried out by groups were identified by government, however unknown attacks were not.
 5. Inspecting the activities of most influential terrorist groups over years. Influential can be described as having much more attacks that were carried out.
 
@@ -39,12 +39,15 @@ As a first approach, all data is used for visualization and the dashboard had 4 
 
 After preparing first prototype, we have interviewed with our user and evaluate the visuals. Color encodings on map were needed to be changed because of not being suitable for color-blinded users and not carrying the message to user as we expected. Safety Index should have taken other measures about attacks into account. Moreover the change in target type and most influential groups would convey more efficacious information for them. Showing all data (1970-2019) was not useful at all, the dynamics are constantly changing, hence last 10 years would be helpful for getting insights about current situation.
 
-In this context, we have transformed the dashboard into accommodately the need of users. Therefore data became more structured and approptiate to load them faster on user interface. The data was filtered out of last 10 years, selected only necessary fields and aggreagated with regarding to the case study. For each specific case, new dataset is structured with required filters. All dataset are described in below.
+In this context, we have transformed the dashboard into accommodately the need of users. Therefore data became more structured and approptiate to load them faster on user interface. The data was filtered out of last 10 years, selected only necessary fields and aggreagated with regarding to the case study. For each specific case, new dataset is structured with required filters and saved as json files. All dataset are described in below.
 
-- **Affiliated and non-affiliated groups over years:** year, country, id(code of country to be used in map), affiliation(indicator if group is unknown or has a name), unique count of events, sum of number of killed people, sum of number of wounded people
-- **Target type over years:**  year, country, id(code of country to be used in map), target type, unique count of events, sum of number of killed people, sum of number of wounded people
-- **The numbers of injured and killed people over years:** year, country, id(code of country to be used in map), unique count of events, sum of number of killed people, sum of number of wounded people 
-- **The most influential terrorist groups over years:** year, country, id(code of country to be used in map), group name, unique count of events, sum of number of killed people, sum of number of wounded people
+- **The numbers of incidents, injured and killed people by countries over years:** year, country, id(code of country to be used in map), unique count of events, sum of number of killed people, sum of number of wounded people 
+- **The numbers of injured and killed people over years:** year, country, id(code of country to be used in map), sum of number of killed people, sum of number of wounded people 
+- **Attack type over years:**  year, country, id(code of country to be used in map), attack type, percentage of unique count of events by attack type in the country and year
+- **Affiliated and non-affiliated attacks over years:** year, country, id(code of country to be used in map), affiliation(indicator if group is unknown or has a name), unique count of events
+- **The most influential terrorist groups over years:** group name, year, unique count of events
+- **The most attacked countries over years:** year, country id (code of the country), unique count of events for affiliated attacks and attacks without affiliation with terrorist group
+
 
 
 ### Visual Encoding and Interaction Design <a name="visual-encoding-and-interaction-design"></a>
@@ -58,6 +61,14 @@ Example for tables:
 | zebra stripes | are neat      |    $1 |
 
 ### Algorithm Design <a name="algorithm-design"></a>
+
+
+This project represents a visualization of data from a large dataset of terrorist attacks from 1977 to 2019 (over 200,000 rows and over 70 columns).
+Based on user requirements, the data for visualization was limited to 2011-2019.
+In order to reduce computational complexity and provide a fast response of the application, a separate set of data was prepared in the required analytics for each visualization (See Data Abstraction section).
+
+In order to ensure fast application response and comfortable user interaction with the app, we refused the tools that we used in the first prototype (plotly, dash) and implemented visualization in javascript using specialized libraries [nivo.rocks](https://nivo.rocks/). We have run a lot of tests to check the app's responsiveness and ergonomics, as well as the ease of presentation of information on various devices.
+
 
 ## Running the Application <a name="running-the-application"></a>
 
