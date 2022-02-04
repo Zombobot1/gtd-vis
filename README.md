@@ -39,12 +39,15 @@ As a first approach, all data is used for visualization and the dashboard had 4 
 
 After preparing first prototype, we have interviewed with our user and evaluate the visuals. Color encodings on map were needed to be changed because of not being suitable for color-blinded users and not carrying the message to user as we expected. Safety Index should have taken other measures about attacks into account. Moreover the change in target type and most influential groups would convey more efficacious information for them. Showing all data (1970-2019) was not useful at all, the dynamics are constantly changing, hence last 10 years would be helpful for getting insights about current situation.
 
-In this context, we have transformed the dashboard into accommodately the need of users. Therefore data became more structured and approptiate to load them faster on user interface. The data was filtered out of last 10 years, selected only necessary fields and aggreagated with regarding to the case study. For each specific case, new dataset is structured with required filters. All dataset are described in below.
+In this context, we have transformed the dashboard into accommodately the need of users. Therefore data became more structured and approptiate to load them faster on user interface. The data was filtered out of last 10 years, selected only necessary fields and aggreagated with regarding to the case study. For each specific case, new dataset is structured with required filters and saved as json files. All dataset are described in below.
 
-- **Affiliated and non-affiliated groups over years:** year, country, id(code of country to be used in map), affiliation(indicator if group is unknown or has a name), unique count of events, sum of number of killed people, sum of number of wounded people
-- **Attack type over years:**  year, country, id(code of country to be used in map), attack type, unique count of events, sum of number of killed people, sum of number of wounded people
-- **The numbers of injured and killed people over years:** year, country, id(code of country to be used in map), unique count of events, sum of number of killed people, sum of number of wounded people 
-- **The most influential terrorist groups over years:** year, country, id(code of country to be used in map), group name, unique count of events, sum of number of killed people, sum of number of wounded people
+- **The numbers of incidents, injured and killed people by countries over years:** year, country, id(code of country to be used in map), unique count of events, sum of number of killed people, sum of number of wounded people 
+- **The numbers of injured and killed people over years:** year, country, id(code of country to be used in map), sum of number of killed people, sum of number of wounded people 
+- **Attack type over years:**  year, country, id(code of country to be used in map), attack type, percentage of unique count of events by attack type in the country and year
+- **Affiliated and non-affiliated attacks over years:** year, country, id(code of country to be used in map), affiliation(indicator if group is unknown or has a name), unique count of events
+- **The most influential terrorist groups over years:** group name, year, unique count of events
+- **The most attacked countries over years:** year, country id (code of the country), unique count of events for affiliated attacks and attacks without affiliation with terrorist group
+
 
 
 ### Visual Encoding and Interaction Design <a name="visual-encoding-and-interaction-design"></a>
