@@ -33,7 +33,7 @@ function App_() {
   const showAboutS = useState(false)
   const isEarthVisibleS = useState<boolean | undefined>(undefined)
   let className = 'app'
-  console.log(location.pathname.includes('details'))
+
   if (!location.pathname.includes('details')) className += ' no-overflow'
   if (navigator.userAgent.includes('Win')) className += ' scrollable'
 

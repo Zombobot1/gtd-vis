@@ -67,31 +67,7 @@ export function Globe({ showAboutS }: Globe) {
   const { casualties, fatalities, injuries } = getInjuriesInfo(country)
 
   const mobile = useIsMobile()
-  // const ref2 = useRef()
 
-  // const [pinched, setPinched] = useState({ s: 0.2, dx: 0 })
-  // const [dragged, setDragged] = useState({ dx: 0, dy: 0, lambda: -27, phi: -14, active: true })
-  // useGesture(
-  //   {
-  //     onPinchStart: () => setDragged((old) => ({ ...old, active: false })),
-  //     onPinchEnd: () => setTimeout(() => setDragged((old) => ({ ...old, active: true })), 100),
-  //     onPinch: ({ delta: [dx] }) => {
-  //       setPinched((old) => {
-  //         const s = clamp(old.s + Math.sign(dx) / 300, 0.2, 0.5)
-  //         console.log(s)
-  //         return { s, dx }
-  //       })
-  //     },
-  //     onDrag: ({ offset: [dx, dy] }) =>
-  //       setDragged((old) => {
-  //         if (!old.active) return old
-  //         const lambda = clamp(old.lambda + (dx - old.dx) / 4, -180, 180)
-  //         const phi = clamp(old.phi - (dy - old.dy) / 8, -90, 90)
-  //         return { ...old, lambda, phi, dx, dy }
-  //       }),
-  //   },
-  //   { target: ref2, drag: { threshold: 10 } },
-  // )
   const countryName = (countryMapping as any)[country]
   const leftDrawerS = useState(false)
   const rightDrawerS = useState(false)
@@ -99,52 +75,9 @@ export function Globe({ showAboutS }: Globe) {
 
   const op = useState(false)
   const s = op[0] ? { transform: 'translate(10px, 10px) rotate(90deg)' } : {}
-  // return (
-  //   <div
-  //     style={{
-  //       width: '100vw',
-  //       height: '100vh',
-  //       backgroundColor: 'black',
-  //       display: 'flex',
-  //       flexDirection: 'column',
-  //       alignItems: 'flex-start',
-  //       gap: '1rem',
-  //     }}
-  //   >
-  //     <div
-  //       style={{
-  //         width: '5rem',
-  //         height: '5rem',
-  //         backgroundColor: 'white',
-  //         transition: 'transform 500ms ease-in-out',
-  //         ...s,
-  //       }}
-  //     ></div>
-  //     <button onClick={() => op[1]((o) => !o)} style={{ width: '5rem', height: '3rem' }}>
-  //       Click
-  //     </button>
-  //   </div>
-  // )
 
   return (
     <>
-      {/* <div style={{ position: 'relative', width: '100vw', height: '100vh', userSelect: 'none' }}>
-        <div
-          ref={ref2}
-          style={{
-            position: 'absolute',
-            top: '20%',
-            left: '15%',
-            width: '70vw',
-            height: '70vw',
-            backgroundColor: 'red',
-            touchAction: 'none',
-            userSelect: 'none',
-          }}
-        >
-          {`P: ${pinched.s}`}
-        </div>
-        </div>*/}
       <div>
         {mobile && (
           <>
@@ -213,7 +146,6 @@ export function Globe({ showAboutS }: Globe) {
                 >
                   <WorldMap
                     onCountryClick={(c) => {
-                      console.log(c)
                       setIsPlaying(false)
                       setCurrentYearI(years.length - 1)
                       setCountry(c)

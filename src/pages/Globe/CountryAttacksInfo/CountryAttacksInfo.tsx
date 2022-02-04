@@ -130,7 +130,6 @@ function AttackTypes({ data: initialData, inPanel }: AttackTypes_) {
             },
           ]}
           tooltip={(d) => {
-            console.log(d)
             return (
               <div className="pie-tooltip">
                 {d.datum.label}: <b>{d.datum.value}</b>
