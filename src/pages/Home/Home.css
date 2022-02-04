@@ -9,8 +9,12 @@
 
 @media screen and (max-width: 600px) {
   .home {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
     padding-top: 2rem;
-    padding-left: 2rem;
+    padding-left: 0;
   }
 }
 
@@ -35,6 +39,8 @@
 @media screen and (max-width: 600px) {
   .gtd {
     font-size: 1rem;
+    margin-right: 0;
+    margin-left: 2rem;
   }
 
   .gtd > .iconify {
@@ -84,10 +90,12 @@ main {
 
 @media screen and (max-width: 600px) {
   main {
+    position: static;
     margin-top: 2rem;
     position: static;
     max-width: 80vw;
     transform: none;
+    padding-left: 2rem;
   }
 }
 
@@ -112,32 +120,50 @@ h1 {
 
 .cta {
   width: 15rem;
-}
-
-.ball-o {
-  position: absolute;
-  bottom: -20%;
-  right: -10%;
-
-  width: 55vw;
-  height: 55vw;
-}
-
-.ball {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 0 4vw #200202;
-}
-
-@media screen and (min-height: 1080px) {
-  .ball-o {
-    bottom: -10%;
-  }
+  z-index: 1;
 }
 
 @media screen and (max-width: 600px) {
-  .ball-o {
-    bottom: 0%;
+  .cta {
+    position: relative;
+    width: 10rem;
+    margin-top: 3rem;
+    margin-bottom: auto;
+    margin-left: 2rem;
   }
+}
+
+.earth-o {
+  position: absolute;
+  right: -10%;
+  bottom: -10%;
+  transition: opacity 350ms ease-out;
+  transition-delay: 250ms;
+  opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .earth-o {
+    position: fixed;
+    bottom: -1rem;
+  }
+}
+
+.earth-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(204, 53, 53, 0.05) 25%,
+    rgba(204, 53, 53, 0.15) 53%,
+    rgba(204, 53, 53, 0.05) 56%,
+    rgba(204, 53, 53, 0) 70%
+  );
+  z-index: 200;
+  pointer-events: none;
 }

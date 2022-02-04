@@ -6,10 +6,9 @@
 
 .y-label {
   position: absolute;
-}
-
-.x-label {
-  position: absolute;
+  font-size: 0.75rem;
+  top: 30px;
+  left: 25px;
 }
 
 .attacks-info {
@@ -40,4 +39,11 @@
   width: 100%;
   height: 100%;
   flex-direction: column;
+}
+
+.pie-tooltip {
+  background-color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: #000;
 }

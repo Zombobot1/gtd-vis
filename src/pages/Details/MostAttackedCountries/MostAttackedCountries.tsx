@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { mostAttackedData } from './mostAttackedData'
 import { Slider } from '../../../utils/Slider/Slider'
 import { colorMap, theme } from '../../../theme'
+import { useIsMobile } from '../../../utils/hooks/useIsMobile'
 
 export function MostAttackedCountries() {
   const years = mostAttackedData.map((d) => d.year)
@@ -11,18 +12,17 @@ export function MostAttackedCountries() {
 
   const data = mostAttackedData.find((d) => d.year === years[currentYearI])!.data
 
+  const mobile = useIsMobile()
+
   return (
     <div className="most-attacked">
-      <div>
-        <Slider points={years} currentIndexS={[currentYearI, setCurrentYearI]} />
-      </div>
       <ResponsiveBar
         data={data}
-        theme={bigTheme}
+        theme={mobile ? theme : bigTheme}
         colors={[colorMap.lightYellow, colorMap.orange]}
         keys={['affiliated', 'unknown']}
         indexBy="id"
-        margin={{ top: 20, right: 130, bottom: 60, left: 55 }}
+        margin={{ top: 35, right: mobile ? 10 : 30, bottom: 80, left: mobile ? 35 : 80 }}
         borderRadius={4}
         innerPadding={4}
         padding={0.3}
@@ -36,9 +36,16 @@ export function MostAttackedCountries() {
         enableGridY={false}
         axisTop={null}
         axisRight={null}
-        axisLeft={{
-          tickPadding: 12,
-        }}
+        axisLeft={
+          mobile
+            ? {}
+            : {
+                tickPadding: 12,
+                legend: 'Country',
+                legendOffset: -75,
+                legendPosition: 'middle',
+              }
+        }
         axisBottom={{
           tickSize: 5,
           tickPadding: 8,
@@ -46,6 +53,7 @@ export function MostAttackedCountries() {
           legend: 'Attack number',
           legendPosition: 'middle',
           legendOffset: 50,
+          ...(mobile ? { tickValues: 5 } : {}),
         }}
         labelSkipWidth={12}
         labelSkipHeight={12}
@@ -56,20 +64,23 @@ export function MostAttackedCountries() {
         legends={[
           {
             dataFrom: 'keys',
-            anchor: 'top-right',
-            direction: 'column',
+            anchor: 'top-left',
+            direction: 'row',
             justify: false,
-            translateX: 120,
-            translateY: 10,
+            translateX: 0,
+            translateY: -35,
             itemsSpacing: 16,
             itemWidth: 100,
             itemHeight: 20,
             itemDirection: 'left-to-right',
-            symbolSize: 20,
+            symbolSize: 15,
             symbolShape: 'circle',
           },
         ]}
       />
+      <div>
+        <Slider points={years} currentIndexS={[currentYearI, setCurrentYearI]} />
+      </div>
     </div>
   )
 }

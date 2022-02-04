@@ -24,17 +24,13 @@ export const colors = [
   colorMap.orange,
   colorMap.lightOrange,
   colorMap.lightYellow,
-  // colorMap.lightAqua,
-  // colorMap.aqua,
-  // colorMap.lightBlue,
-  // colorMap.blue,
 ]
 
 export const pieColors = [
-  colorMap.darkRed,
+  colorMap.lightRed,
   colorMap.red,
   colorMap.orange,
-  colorMap.lightRed,
+  colorMap.darkRed,
   colorMap.lightOrange,
   colorMap.lightYellow,
 ]

@@ -6,24 +6,29 @@ import { ReactComponent as HelpI } from './question.svg'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { State } from '../../utils'
 
 export interface Nav {
   absolute?: boolean
+  showAboutS: State<boolean>
 }
 
-export function Nav({ absolute = true }: Nav) {
+export function Nav({ showAboutS, absolute = true }: Nav) {
   const navigate = useNavigate()
   const location = useLocation()
   const mobile = useIsMobile()
   let active = ''
-  if (location.pathname.includes('globe')) active = 'map'
-  else if (location.pathname.includes('details')) active = 'stat'
+  if (location.pathname.includes('globe') && !showAboutS[0]) active = 'map'
+  else if (location.pathname.includes('details') && !showAboutS[0]) active = 'stat'
+
+  const variant = mobile ? mobileBtnV : btnV
+
   return (
     <div className={'nav ' + (absolute && !mobile ? 'absolute' : '')}>
       <motion.button
-        className={'nav-btn ' + (active === '' ? 'active' : '')}
+        className={'nav-btn ' + (active === '' && !showAboutS[0] ? 'active' : '')}
         onClick={() => navigate('/')}
-        variants={btnV}
+        variants={variant}
         whileHover="hover"
         whileTap="tap"
       >
@@ -32,7 +37,7 @@ export function Nav({ absolute = true }: Nav) {
       <motion.button
         className={'nav-btn ' + (active === 'map' ? 'active' : '')}
         onClick={() => navigate('/globe')}
-        variants={btnV}
+        variants={variant}
         whileHover="hover"
         whileTap="tap"
       >
@@ -41,16 +46,16 @@ export function Nav({ absolute = true }: Nav) {
       <motion.button
         className={'nav-btn ' + (active === 'stat' ? 'active' : '')}
         onClick={() => navigate('/details')}
-        variants={btnV}
+        variants={variant}
         whileHover="hover"
         whileTap="tap"
       >
         <StatisticI />
       </motion.button>
       <motion.button
-        className={'nav-btn '}
-        onClick={() => navigate('/details')}
-        variants={btnV}
+        className={'nav-btn ' + (showAboutS[0] ? 'active' : '')}
+        onClick={() => showAboutS[1]((o) => !o)}
+        variants={variant}
         whileHover="hover"
         whileTap="tap"
       >
@@ -66,5 +71,11 @@ const btnV: any = {
   },
   tap: {
     scale: 0.9,
+  },
+}
+
+const mobileBtnV: any = {
+  tap: {
+    scale: 0.7,
   },
 }

@@ -1,5 +1,5 @@
 export const countryMapping = {
-  '': 'All',
+  '': 'Globe',
   AFG: 'Afghanistan',
   AGO: 'Angola',
   ALB: 'Albania',

@@ -14,38 +14,42 @@ interface AttacksChart_ {
   globeShown: boolean
 }
 
-function AttacksChart({ data, legends, globeShown }: AttacksChart_) {
+function AttacksChart({ data: initialData, legends, globeShown }: AttacksChart_) {
+  let data = [...initialData]
+  if (globeShown) data = data.map((d) => ({ id: d.id, data: d.data.map((p) => ({ x: p.x, y: p.y / 1000 })) }))
+
   return (
     <div className="line">
-      <p className="y-label">Numbers(T)</p>
-      <p className="x-label">year</p>
+      <p className="y-label">Count {globeShown ? '(in T)' : ''}</p>
       <ResponsiveLine
         data={data}
-        colors={[colorMap.lightYellow, colorMap.lightRed]}
+        colors={[colorMap.lightRed, colorMap.lightYellow]}
         theme={theme}
         curve="catmullRom"
         enableSlices="x"
-        margin={{ top: 50, right: 30, bottom: 45, left: 65 }}
+        margin={{ top: 55, right: 30, bottom: 45, left: 50 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
           max: 'auto',
-          stacked: true,
+          stacked: false,
           reverse: false,
         }}
-        yFormat=" >-.2f"
+        yFormat=""
         axisTop={null}
         axisRight={null}
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
+          tickValues: [2011, 2013, 2015, 2017, 2019],
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
+          tickValues: 5,
         }}
         enableGridX={false}
         enableGridY={false}
@@ -62,8 +66,8 @@ function AttacksChart({ data, legends, globeShown }: AttacksChart_) {
             anchor: 'top-left',
             direction: 'row',
             justify: false,
-            translateX: -33,
-            translateY: -32,
+            translateX: 60,
+            translateY: -35,
             itemsSpacing: 16,
             itemDirection: 'left-to-right',
             itemWidth: 80,
@@ -71,8 +75,8 @@ function AttacksChart({ data, legends, globeShown }: AttacksChart_) {
             symbolSize: 14,
             symbolShape: 'circle',
             data: [
-              { id: '2', label: legends[0], color: colorMap.lightYellow },
-              { id: '1', label: legends[1], color: colorMap.lightRed },
+              { id: '2', label: legends[0], color: colorMap.lightRed },
+              { id: '1', label: legends[1], color: colorMap.lightYellow },
             ],
           },
         ]}
@@ -88,11 +92,13 @@ type PieData = {
 
 interface AttackTypes_ {
   data: PieData
+  inPanel?: boolean
 }
 
-function AttackTypes({ data }: AttackTypes_) {
+function AttackTypes({ data: initialData, inPanel }: AttackTypes_) {
+  const data = sort(initialData, (d) => d.value).map((d, i) => ({ id: i, value: d.value, label: d.id }))
   return (
-    <div className="pie-container">
+    <div className="pie-container" style={inPanel ? { paddingTop: '1rem', height: '19rem' } : {}}>
       <div className="pie-header">Attack %</div>
       <div className="pie">
         <ResponsivePie
@@ -123,6 +129,14 @@ function AttackTypes({ data }: AttackTypes_) {
               symbolShape: 'circle',
             },
           ]}
+          tooltip={(d) => {
+            console.log(d)
+            return (
+              <div className="pie-tooltip">
+                {d.datum.label}: <b>{d.datum.value}</b>
+              </div>
+            )
+          }}
         />
       </div>
     </div>
@@ -134,14 +148,15 @@ export interface VictimsOrAttacks {
   globeShown: boolean
 }
 
-export function VictimsOrAttacks({ data, globeShown }: VictimsOrAttacks) {
+export function Victims({ data, globeShown }: VictimsOrAttacks) {
   return <AttacksChart data={data} legends={['Fatalities', 'Injuries']} globeShown={globeShown} />
 }
 
 export interface CountryAttacksInfo {
   data: AttackPieData
+  inPanel?: boolean
 }
 
-export function AttackTypesPie({ data }: CountryAttacksInfo) {
-  return <AttackTypes data={data} />
+export function AttackTypesPie({ data, inPanel }: CountryAttacksInfo) {
+  return <AttackTypes data={data} inPanel={inPanel} />
 }

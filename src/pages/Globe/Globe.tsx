@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { AttackTypesPie, VictimsOrAttacks } from './CountryAttacksInfo/CountryAttacksInfo'
+import { AttackTypesPie, Victims } from './CountryAttacksInfo/CountryAttacksInfo'
 import { CountyIdAndName, gen } from '../../types'
-import { sum } from '../../utils'
+import { clamp, State, sum } from '../../utils'
 import { Btn } from '../../utils/Btn/Btn'
 import useInterval from '../../utils/hooks/useInterval'
 import { usePrevious } from '../../utils/hooks/usePrevious'
@@ -21,8 +21,13 @@ import useHover from '../../utils/hooks/useHover'
 import { ReactComponent as ArrowLeftI } from './arrowLeft.svg'
 import { useIsMobile } from '../../utils/hooks/useIsMobile'
 import { useDrag, useGesture } from '@use-gesture/react'
+import { Drawer } from './Drawer/Drawer'
 
-export function Globe() {
+export interface Globe {
+  showAboutS: State<boolean>
+}
+
+export function Globe({ showAboutS }: Globe) {
   const [country, setCountry] = useState('')
   const [years] = useState(geoData.map((d) => d.year))
   const currentYearS = useState(years.length - 1)
@@ -62,115 +67,208 @@ export function Globe() {
   const { casualties, fatalities, injuries } = getInjuriesInfo(country)
 
   const mobile = useIsMobile()
+  // const ref2 = useRef()
+
+  // const [pinched, setPinched] = useState({ s: 0.2, dx: 0 })
+  // const [dragged, setDragged] = useState({ dx: 0, dy: 0, lambda: -27, phi: -14, active: true })
+  // useGesture(
+  //   {
+  //     onPinchStart: () => setDragged((old) => ({ ...old, active: false })),
+  //     onPinchEnd: () => setTimeout(() => setDragged((old) => ({ ...old, active: true })), 100),
+  //     onPinch: ({ delta: [dx] }) => {
+  //       setPinched((old) => {
+  //         const s = clamp(old.s + Math.sign(dx) / 300, 0.2, 0.5)
+  //         console.log(s)
+  //         return { s, dx }
+  //       })
+  //     },
+  //     onDrag: ({ offset: [dx, dy] }) =>
+  //       setDragged((old) => {
+  //         if (!old.active) return old
+  //         const lambda = clamp(old.lambda + (dx - old.dx) / 4, -180, 180)
+  //         const phi = clamp(old.phi - (dy - old.dy) / 8, -90, 90)
+  //         return { ...old, lambda, phi, dx, dy }
+  //       }),
+  //   },
+  //   { target: ref2, drag: { threshold: 10 } },
+  // )
+  const countryName = (countryMapping as any)[country]
+  const leftDrawerS = useState(false)
+  const rightDrawerS = useState(false)
+  const countryData = worldMapData.find((d) => d.id === country)
+
+  const op = useState(false)
+  const s = op[0] ? { transform: 'translate(10px, 10px) rotate(90deg)' } : {}
+  // return (
+  //   <div
+  //     style={{
+  //       width: '100vw',
+  //       height: '100vh',
+  //       backgroundColor: 'black',
+  //       display: 'flex',
+  //       flexDirection: 'column',
+  //       alignItems: 'flex-start',
+  //       gap: '1rem',
+  //     }}
+  //   >
+  //     <div
+  //       style={{
+  //         width: '5rem',
+  //         height: '5rem',
+  //         backgroundColor: 'white',
+  //         transition: 'transform 500ms ease-in-out',
+  //         ...s,
+  //       }}
+  //     ></div>
+  //     <button onClick={() => op[1]((o) => !o)} style={{ width: '5rem', height: '3rem' }}>
+  //       Click
+  //     </button>
+  //   </div>
+  // )
 
   return (
-    // <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-    //   <div
-    //     ref={ref2}
-    //     style={{
-    //       position: 'absolute',
-    //       top: '20%',
-    //       left: '15%',
-    //       width: '70vw',
-    //       height: '70vw',
-    //       backgroundColor: 'red',
-    //       touchAction: 'none',
-    //     }}
-    //   >
-    //     {`D: ${dragged.info} P: ${pinched}`}
-    //   </div>
-    // </div>
-    <div className="globe">
-      <h2 className="globe-header">{country === '' ? 'Globe' : (countryMapping as any)[country]}</h2>
-      <AnimatePresence>
-        {country && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            style={{ userSelect: 'none' }}
-          >
-            <div className="back-to-globe" onClick={() => setCountry('')}>
-              <ArrowLeftI />
-              <p className="back-to-globe-text">back to globe</p>
-            </div>
-          </motion.div>
+    <>
+      {/* <div style={{ position: 'relative', width: '100vw', height: '100vh', userSelect: 'none' }}>
+        <div
+          ref={ref2}
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '15%',
+            width: '70vw',
+            height: '70vw',
+            backgroundColor: 'red',
+            touchAction: 'none',
+            userSelect: 'none',
+          }}
+        >
+          {`P: ${pinched.s}`}
+        </div>
+        </div>*/}
+      <div>
+        {mobile && (
+          <>
+            <Drawer side="left" openS={leftDrawerS} showBtn={!rightDrawerS[0]}>
+              <div className="counters-panel">
+                <h3>{countryName}</h3>
+                <GlobeCounters
+                  affiliated={affiliated}
+                  fatalitiesCount={fatalities}
+                  injuriesCount={injuries}
+                  showAttacks={showAttacks}
+                  casualties={casualties}
+                  totalCount={total}
+                  unknown={unknown}
+                  incidents={countryData?.value}
+                  killed={countryData?.killed}
+                  wounded={countryData?.wounded}
+                  year={years[currentYearI]}
+                />
+                <Btn
+                  text={showAttacks ? 'Show Victims' : 'Show Attacks'}
+                  onClick={() => setShowVictims((old) => !old)}
+                  width={230}
+                />
+              </div>
+            </Drawer>
+            <Drawer side="right" openS={rightDrawerS} showBtn={!leftDrawerS[0]}>
+              <div className="plots-panel">
+                <h3>{countryName}</h3>
+                <div className="line-card line-card-top">
+                  <Victims data={lineData} globeShown={globeShown} />
+                </div>
+                <div className="line-card line-card-bottom">
+                  <AttackTypesPie data={pieData} inPanel={true} />
+                </div>
+              </div>
+            </Drawer>
+          </>
         )}
-      </AnimatePresence>
+        <div className="globe">
+          <h2 className="globe-header">{country === '' ? 'Globe' : countryName}</h2>
+          <AnimatePresence>
+            {country && (
+              <div className="back-to-globe" onClick={() => setCountry('')}>
+                <ArrowLeftI />
+                <p className="back-to-globe-text">back to globe</p>
+              </div>
+            )}
+          </AnimatePresence>
 
-      {!mobile && (
-        <div className="zoom-info" style={{ opacity: hovered ? 1 : 0 }}>
-          <div>Use shift + wheel to</div>
-          zoom in / out
-        </div>
-      )}
+          {!mobile && (
+            <div className="zoom-info" style={{ opacity: hovered ? 1 : 0 }}>
+              <div>Use shift + wheel to</div>
+              zoom in / out
+            </div>
+          )}
 
-      <EarthWrapper>
-        <div className="c-m">
-          <div className="c-i" ref={ref}>
-            <motion.div
-              className="core"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.75 }}
-            >
-              <WorldMap
-                onCountryClick={(c) => {
-                  console.log(c)
-                  setIsPlaying(false)
-                  setCurrentYearI(years.length - 1)
-                  setCountry(c)
-                }}
-                data={worldMapData}
-              />
+          <EarthWrapper>
+            <div className={!mobile ? 'c-m' : ''}>
+              <div className="c-i" ref={ref}>
+                <motion.div
+                  className="core"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.75 }}
+                >
+                  <WorldMap
+                    onCountryClick={(c) => {
+                      console.log(c)
+                      setIsPlaying(false)
+                      setCurrentYearI(years.length - 1)
+                      setCountry(c)
+                    }}
+                    data={worldMapData}
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </EarthWrapper>
+
+          {!mobile && (
+            <div className="globe-attacks-info">
+              <motion.div className="globe-attacks-info-i" variants={panelV} initial="from" animate="to">
+                <GlobeCounters
+                  affiliated={affiliated}
+                  fatalitiesCount={fatalities}
+                  injuriesCount={injuries}
+                  showAttacks={showAttacks}
+                  casualties={casualties}
+                  totalCount={total}
+                  unknown={unknown}
+                />
+                <Btn
+                  text={showAttacks ? 'Show Victims' : 'Show Attacks'}
+                  onClick={() => setShowVictims((old) => !old)}
+                  width={230}
+                />
+              </motion.div>
+            </div>
+          )}
+
+          <div className="timeline-o">
+            <motion.div className="timeline" variants={timelineV} initial="from" animate="to">
+              <PlayBtn isPlayingS={isPlayingS} />
+              <Slider points={years} currentIndexS={currentYearS} />
             </motion.div>
           </div>
-        </div>
-      </EarthWrapper>
 
-      {!mobile && (
-        <div className="globe-attacks-info">
-          <motion.div className="globe-attacks-info-i" variants={panelV} initial="from" animate="to">
-            <GlobeCounters
-              affiliated={affiliated}
-              fatalitiesCount={fatalities}
-              injuriesCount={injuries}
-              showAttacks={showAttacks}
-              casualties={casualties}
-              totalCount={total}
-              unknown={unknown}
-            />
-            <Btn
-              text={showAttacks ? 'Show Victims' : 'Show Attacks'}
-              onClick={() => setShowVictims((old) => !old)}
-              width={230}
-            />
-          </motion.div>
+          {!mobile && (
+            <div className="globe-charts">
+              <div className="globe-charts-i">
+                <motion.div className="line-card line-card-top" variants={cardsV} initial="from" animate="to">
+                  <Victims data={lineData} globeShown={globeShown} />
+                </motion.div>
+                <motion.div className="line-card line-card-bottom" variants={cardsV} initial="from" animate="to">
+                  <AttackTypesPie data={pieData} />
+                </motion.div>
+              </div>
+            </div>
+          )}
+          <Nav showAboutS={showAboutS} />
         </div>
-      )}
-
-      <div className="timeline-o">
-        <motion.div className="timeline" variants={timelineV} initial="from" animate="to">
-          <PlayBtn isPlayingS={isPlayingS} />
-          <Slider points={years} currentIndexS={currentYearS} />
-        </motion.div>
       </div>
-
-      {!mobile && (
-        <div className="globe-charts">
-          <div className="globe-charts-i">
-            <motion.div className="line-card line-card-top" variants={cardsV} initial="from" animate="to">
-              <VictimsOrAttacks data={lineData} globeShown={globeShown} />
-            </motion.div>
-            <motion.div className="line-card line-card-bottom" variants={cardsV} initial="from" animate="to">
-              <AttackTypesPie data={pieData} />
-            </motion.div>
-          </div>
-        </div>
-      )}
-      {!mobile && <Nav />}
-    </div>
+    </>
   )
 }
 
@@ -180,7 +278,17 @@ type EarthWrapper = {
 
 function EarthWrapper({ children }: EarthWrapper) {
   const mobile = useIsMobile()
-  if (mobile) return <>{children}</>
+  if (mobile)
+    return (
+      <motion.div
+        className="c-m"
+        initial={{ x: '-50%', y: '-55%', scale: 0 }}
+        animate={{ x: '-50%', y: '-55%', scale: 1 }}
+        transition={{ duration: 0.75 }}
+      >
+        {children}
+      </motion.div>
+    )
   return (
     <motion.div
       className="c-o"

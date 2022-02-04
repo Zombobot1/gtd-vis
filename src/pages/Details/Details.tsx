@@ -4,8 +4,15 @@ import { TerroristGroups } from './TerroristGroups/TerroristGroups'
 import { ReactComponent as HeartI } from './heart.svg'
 import { Nav } from '../../utils/Nav/Nav'
 import { motion } from 'framer-motion'
+import { State } from '../../utils'
+import { useIsMobile } from '../../utils/hooks/useIsMobile'
 
-export function Details() {
+export interface Details {
+  showAboutS: State<boolean>
+}
+
+export function Details({ showAboutS }: Details) {
+  const mobile = useIsMobile()
   return (
     <div className="details">
       <motion.div
@@ -14,8 +21,8 @@ export function Details() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h2 style={{ marginBottom: '1rem', marginRight: 'auto' }}>Details</h2>
-        <Nav active="stat" absolute={false} />
+        <h2>Details</h2>
+        {!mobile && <Nav absolute={false} showAboutS={showAboutS} />}
       </motion.div>
       <motion.div className="first-detailed-chart" variants={ch1V} initial="from" animate="to">
         <h3>Most attacked countries over the time</h3>
@@ -34,6 +41,7 @@ export function Details() {
       <a className="with-luv" href="https://www.fu-berlin.de/en/index.html" target="_blank">
         From FU with <HeartI />
       </a>
+      {mobile && <Nav absolute={false} showAboutS={showAboutS} />}
     </div>
   )
 }

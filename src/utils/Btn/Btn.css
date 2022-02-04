@@ -9,6 +9,7 @@
   color: #cc3535;
   font-size: 1rem;
   text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:active {

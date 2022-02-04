@@ -2,11 +2,7 @@ import './App.css'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ResponsiveChoropleth, ResponsiveChoroplethCanvas } from '@nivo/geo'
 import { WorldMap } from './pages/Globe/WorldMap/WorldMap'
-import {
-  AttackTypesPie,
-  CountryAttacksInfo,
-  VictimsOrAttacks,
-} from './pages/Globe/CountryAttacksInfo/CountryAttacksInfo'
+import { AttackTypesPie, CountryAttacksInfo, Victims } from './pages/Globe/CountryAttacksInfo/CountryAttacksInfo'
 import { mostAttackedData } from './pages/Details/MostAttackedCountries/mostAttackedData'
 import { ResponsiveBar } from '@nivo/bar'
 import { clamp, copyTextToClipboard, generate, isIn, rnd, State } from './utils'
@@ -29,43 +25,46 @@ import { geoFeatures } from './pages/Globe/WorldMap/geoFeatures'
 import useWindowSize from './utils/hooks/useWindowSize'
 import { useIsMobile } from './utils/hooks/useIsMobile'
 import { Nav } from './utils/Nav/Nav'
+import { About } from './pages/About/About'
+
+function App_() {
+  const location = useLocation()
+  const mobile = useIsMobile()
+  const showAboutS = useState(false)
+  const isEarthVisibleS = useState<boolean | undefined>(undefined)
+  let className = 'app'
+  console.log(location.pathname.includes('details'))
+  if (!location.pathname.includes('details')) className += ' no-overflow'
+  if (navigator.userAgent.includes('Win')) className += ' scrollable'
+
+  let earthStyle = {}
+  if (isEarthVisibleS[0] === undefined) earthStyle = { opacity: 0 }
+  else if (isEarthVisibleS[0] === false) earthStyle = { opacity: 0, display: 'none' }
+  return (
+    <>
+      <div className={className}>
+        <About showAboutS={showAboutS} />
+        <div className={'earth-o'} style={earthStyle}>
+          <div id="earth" style={{ width: '70vw', maxWidth: '110vh' }}>
+            <div className="earth-glow"></div>
+          </div>
+        </div>
+        <Routes>
+          <Route path="/" element={<Home showAboutS={showAboutS} isEarthVisibleS={isEarthVisibleS} />} />
+          <Route path="globe" element={<Globe showAboutS={showAboutS} />} />
+          <Route path="details" element={<Details showAboutS={showAboutS} />} />
+        </Routes>
+      </div>
+      {/* <div>{mobile && <Nav showAboutS={showAboutS} />}</div> */}
+    </>
+  )
+}
 
 function App() {
-  const mobile = useIsMobile()
   return (
     <BrowserRouter basename="/gtd-vis/">
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="globe" element={<Globe />} />
-          <Route path="details" element={<Details />} />
-        </Routes>
-        {mobile && <Nav />}
-      </div>
+      <App_ />
     </BrowserRouter>
   )
 }
 export default App
-
-/*
-
-Global Terrorism Dashboard
-The Dashboard is based on the data from Global Terrorism Database GTD. The GTD is an event-level database containing more than 200,000 records of terrorist attacks that took place around the world since 1970. It is maintained by the National Consortium for the Study of Terrorism and Responses to Terrorism (START) at the University of Maryland.
-
-The GTD defines a terrorist attack as the threatened or actual use of illegal force and violence by a nonstate actor to attain a political, economic, religious, or social goal through fear, coercion, or intimidation. The Dashboard does not include attacks that were attempted but ultimately unsuccessful. Success of a terrorist strike is defined according to the tangible effects of the attack. Success is not judged in terms of the larger goals of the perpetrators.
-
-Number of Fatalities - the number of total confirmed fatalities for the incident. The number includes all victims and attackers who died as a direct result of the incident.
-
-Number of Injured - the number of confirmed non-fatal injuries to both perpetrators and victims.
-
-affiliated/NonOrganized - the total number of attacks is divided into 2 categories: affiliated and nonorganized, on the basis of the information from GTD about the group name (field 'gname' in GTD) that carried out the attack. If no information about the perpetrator group is available and field 'gname' is equal to 'Unknown', the attack is considered as nonorganized.
-
-
-Safety map
-Safety map shows the level of safety based on the number of terrorist attacks since 1970. Map reflects the current level of safety based on safety index that gives more weight to the more recent years.
-
-Countries with the highest number of affiliated and unknown attacks
-
-
-Source: Global Terrorism Database(GTD)
-*/

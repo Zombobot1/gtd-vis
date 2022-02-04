@@ -15,6 +15,10 @@ export interface GlobeCounters {
   casualties: number
   fatalitiesCount: number
   injuriesCount: number
+  year?: number
+  incidents?: number
+  killed?: number
+  wounded?: number
 }
 
 export function GlobeCounters({
@@ -25,9 +29,39 @@ export function GlobeCounters({
   casualties,
   totalCount,
   affiliated,
+  year,
+  incidents,
+  killed,
+  wounded,
 }: GlobeCounters) {
   return (
     <div>
+      {year && (
+        <>
+          {!killed && <p style={{ marginBottom: '1rem' }}>Select a country to see more</p>}
+          {killed && (
+            <>
+              <div className="latest-info">{year} Stats</div>
+              <table style={{ marginBottom: '1rem' }}>
+                <tbody>
+                  <tr>
+                    <td>Incidents</td>
+                    <td className="tooltip-value">{incidents}</td>
+                  </tr>
+                  <tr>
+                    <td>Killed</td>
+                    <td className="tooltip-value">{killed}</td>
+                  </tr>
+                  <tr>
+                    <td>Wounded</td>
+                    <td className="tooltip-value">{wounded}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </>
+          )}
+        </>
+      )}
       <div className="latest-info">All Time Stats</div>
       <div className="globe-counters">
         <AnimatePresence>

@@ -1,21 +1,46 @@
 .details {
   width: 100vw;
-  padding-top: 3rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  padding-bottom: 3rem;
+  max-width: 100%;
+  padding: 3rem;
   overflow-x: hidden;
 }
 
+@media screen and (max-width: 600px) {
+  .details {
+    padding: 2rem;
+  }
+  .details .nav {
+    transform: translateX(-2rem);
+  }
+}
+
 .details-header {
-  max-width: 93vw;
+  max-width: 95vw;
   display: flex;
   align-items: center;
 }
 
-h3 {
+.details h2 {
+  margin-bottom: 1rem;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .details h2 {
+    font-size: 2rem;
+  }
+}
+
+.details h3 {
   font-size: 1.75rem;
   margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .details h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .first-detailed-chart {
@@ -23,12 +48,34 @@ h3 {
 }
 
 .with-luv {
+  display: block;
   color: #da8181;
   cursor: pointer;
   text-decoration: none;
+  text-align: end;
+}
+
+@media screen and (max-width: 600px) {
+  .with-luv {
+    transform: translateY(-2rem);
+  }
 }
 
 .with-luv .iconify {
   width: 1rem;
   transform: translateY(2px);
+}
+
+.scrollable {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #da8181;
+  border-radius: 0 8px 0 8px;
 }

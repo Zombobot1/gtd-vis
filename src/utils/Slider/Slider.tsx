@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { clamp, DivRef, isIn, State } from '../../utils'
 import { useUpdateEffect } from '../hooks/useUpdateEffect'
+import { useDrag, useGesture } from '@use-gesture/react'
 
 export interface Slider {
   points: number[]
@@ -55,8 +56,8 @@ export function Slider({ points, currentIndexS: currentIndexS }: Slider) {
 
             return <div key={p} className="slider-mark" style={{ ...style, left: delta * i + '%' }} />
           })}
-          <div className="slider-thumb-container" style={{ left: left + '%' }} ref={thumbRef} tabIndex={1}>
-            <div className="slider-thumb" data-current={atEnd ? '' : points[state.i]} />
+          <div className="slider-thumb-container" style={{ left: left + '%' }} tabIndex={1}>
+            <div className="slider-thumb" ref={thumbRef} data-current={atEnd ? '' : points[state.i]} />
           </div>
         </div>
       </div>
@@ -87,50 +88,32 @@ function useTranslateByDrag(
     setState({ prevX: -1, i: currentIndex })
   }, [currentIndex]) // get update from parent
 
-  const onMouseMove = (e: MouseEvent) => {
-    let { pageX } = e
-    setState((old) => {
-      let deltaX = pageX - old.prevX
-      const width = sliderRef.current?.offsetWidth || 0
+  useGesture(
+    {
+      onDrag: ({ movement: [dx] }) => {
+        setState((old) => {
+          let deltaX = dx - old.prevX
+          const width = sliderRef.current?.offsetWidth || 0
 
-      if ((Math.abs(deltaX) / width) * 100 > delta / 1.45) {
-        while ((Math.abs(deltaX) / width) * 100 < delta) {
-          pageX += deltaX > 0 ? 1 : -1
-          deltaX = pageX - old.prevX
-        }
+          if ((Math.abs(deltaX) / width) * 100 > delta / 1.45) {
+            while ((Math.abs(deltaX) / width) * 100 < delta) {
+              dx += deltaX > 0 ? 1 : -1
+              deltaX = dx - old.prevX
+            }
 
-        return {
-          prevX: pageX,
-          i: clamp(old.i + (deltaX > 0 ? 1 : -1), 0, size - 1),
-        }
-      }
+            return {
+              prevX: dx,
+              i: clamp(old.i + (deltaX > 0 ? 1 : -1), 0, size - 1),
+            }
+          }
 
-      return old
-    })
-  }
-
-  useEffect(() => {
-    const onMouseDown = (e: MouseEvent) => {
-      const { pageX } = e
-      setState((old) => ({
-        ...old,
-        prevX: pageX,
-      }))
-      window.addEventListener('mousemove', onMouseMove)
-    }
-
-    const onMouseUp = () => {
-      window.removeEventListener('mousemove', onMouseMove)
-    }
-
-    thumbRef.current?.addEventListener('mousedown', onMouseDown)
-    window.addEventListener('mouseup', onMouseUp)
-
-    return () => {
-      thumbRef.current?.removeEventListener('mousedown', onMouseDown)
-      window.removeEventListener('mouseup', onMouseUp)
-    }
-  }, [])
+          return old
+        })
+      },
+      onDragStart: () => setState((old) => ({ ...old, prevX: -1 })),
+    },
+    { target: thumbRef },
+  )
 
   return stateS
 }
