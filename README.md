@@ -15,7 +15,7 @@
 
 ## Introduction <a name="introduction"></a>
 
-Terrorist attacks have massive economic and psycological effect on wide range of population. In the sense that the dynamics such as change over years in target groups, weapon types, terrorist groups, numbers of terrorist attacks are analysed, that could enable governments,  policy makers, researchers, analysts extrapolating the useful information from the attacks where they happened in past.
+Terrorist attacks have massive economic and psycological effect on wide range of population. In the sense that the dynamics such as change over years in target groups, weapon types, terrorist groups, numbers of terrorist attacks are analysed, that could enable policy makers, researchers, analysts extrapolating the useful information from the attacks where they happened in past.
 
 [The Global Terrorism Database (GTD)](https://www.start.umd.edu/gtd/access/) is the source for our data defines a terrorist attack as the threatened or actual use of illegal force and violence by a non-state actor to attain a political, economic, religious, or social goal through fear, coercion, or intimidation. The GTD is an event-level database containing more than 200,000 records of terrorist attacks that took place around the world beteween years 1970 and 2019. For each event, a wide range of information is available, including the date and location of the incident, the weapons used, nature of the target, the number of casualties, and – when identifiable – the group or individual responsible. It is maintained by the National Consortium for the Study of Terrorism and Responses to Terrorism (START) at the University of Maryland. 
 
@@ -23,7 +23,7 @@ Terrorist attacks have massive economic and psycological effect on wide range of
 
 ### Domain Characterization <a name="domain-characterization"></a>
 
-In our study, we contacted with a researher who working in thinktank which conducts the projects in areas of foreign and security policy or international and European politics. With regarding the needs of our target user(user group) various cases are determined. 
+In our study, we contacted with a researcher who working in think tank which conducts the projects in areas of foreign and security policy or international and European politics. With regarding the needs of our target user group, the following cases are determined. 
 
 1. The change in number of attacks over years both for global and country based, that would help them to take an overview about the state of last 10 years.
 2. Comparing and finding correlation between the fatalities and injuries with number of attacks in order to understand whether a country has improvement in their intelligence service. Mostly attacks have a design to target crowds such as after exploding the bombs in first stage, to the points where people escape, another set of bombs are placed, even some of attacks had third stage with weapons.
@@ -49,19 +49,39 @@ In this context, we have transformed the dashboard into accommodately the need o
 - **The most attacked countries over years:** year, country id (code of the country), unique count of events for affiliated attacks and attacks without affiliation with terrorist group
 
 
-
 ### Visual Encoding and Interaction Design <a name="visual-encoding-and-interaction-design"></a>
 
-Example for tables:
+The dashboard mainly consist of 5 visuals. Each visual is explained in detail below.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+**Representations:**
+- Attack numbers - Worldwide map 
+    - Shows yearly statistics by countries on number of incidents, killed and wounded people.
+    - Number of incidents  is encoded with the colors from light orange to dark red.
+- Fatalities and Injuries - Line charts:
+    - Shows dynamics of fatalities and wounded people over years for chosen country
+- Most attacked countries over the time - Sorted stacked horizontal bar chart:
+    - Shows yearly statistics of the top attacked countries by affiliated and non affiliated attacks.
+- Attack type - Pie chart:
+    - Shows all time percentages of attacks by the type of attack.
+- Top 5 terrorist groups according to number of attacks - Stacked line chart:
+    - Shows the attack numbers over time for top 5 group.
+**Use of timeline:**
+    - Timeline was used to show dynamics of the measures for all visuals excluding Attack Type pie chart.
+**Color encoding:**
+Generally, we have avoid to use red and green colors together to the users who can be color-blind. Due to the perception of topic, we decided to apply predominantly dark red in background and coherent colors.
+    - World map: Unified color pallet from light orange to dark red was used in all graphs and on the map. Darker colors represent higher numbers
+    - Fatalities and injuries: Light pink represent the fatalities and light beige represents the injuries.
+    - Attack type: Basically used only 4 colors to show the share of the most occured attack types for global and country selection.
+    - Most attacked countries over the time: Light beige represents affiliated, orange represents unknown groups who carried out the attacks.
+    - Top 5 terrorist groups according to number of attacks: Top 5 terrorist groups is represented with light beige to dark red colors.
+    
+ The globe page of dashboard is built in showing the values based on interaction. Interactive world map allow the users,
+    - hover on countries and check the details of number of killed, injured, events
+    - rotate and zoom in/out the globe to choose the country in order to inspect the 'Fatalieties and Injured', 'Attack Type' visuals and overall statistics  at the left-hand side of dashboard.
+The most attacked countries over time chart in detail section enables the users to choose the interested year to inspect most attacked countries for selected year.
+Top 5 terrorist groups according to number of attacks is used for analyzing the values of each groups hovered over year.
 
 ### Algorithm Design <a name="algorithm-design"></a>
-
 
 This project represents a visualization of data from a large dataset of terrorist attacks from 1977 to 2019 (over 200,000 rows and over 70 columns).
 Based on user requirements, the data for visualization was limited to 2011-2019.
@@ -85,9 +105,9 @@ The project is currently deployed to [Github Pages](https://zombobot1.github.io/
 
 ## Screencast <a name="screencast"></a>
 
-The screencast of the project is accessible over the link given below.
+The screencast of the project is accessible over the [the screencast link](https://youtu.be/VyhLRJVoIrI) given below.
 
-<a href="https://youtu.be/VyhLRJVoIrI" target="_blank">
+<a href="https://youtu.be/VyhLRJVoIrI" target="_blank"> 
     <img src="https://img.youtube.com/vi/VyhLRJVoIrI/hqdefault.jpg" alt="Screencast - GTD Data Visualization" width="240" height="180" border="10" />
 </a>
 
