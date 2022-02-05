@@ -84,7 +84,7 @@ Generally, we have avoid to use red and green colors together to become more inc
     
  The globe page of dashboard is built in showing the values based on interaction. Interactive world map allow the users,
  
-- hover over countries and check the details of number of killed, injured, events
+- hover over countries and check the details of number of killed people, injured people and events
 - rotate and zoom in/out the globe to choose the country in order to inspect the 'Fatalieties and Injured', 'Attack Type' visuals and overall statistics  at the left-hand side of dashboard.
 
 The most attacked countries over time chart in detail section enables the users to choose the interested year to inspect most attacked countries for selected year.
