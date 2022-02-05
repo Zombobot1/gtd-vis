@@ -74,7 +74,7 @@ Timeline was used to show dynamics of the measures for all visuals excluding Att
     
 **Color encoding:**
 
-Generally, we have avoid to use red and green colors together to the users who can be color-blind. Due to the perception of topic, we decided to apply predominantly dark red in background and coherent colors.
+Generally, we have avoid to use red and green colors together to become more inclusive. Due to the perception of topic, we decided to apply predominantly dark red in background and coherent colors.
 
 - World map: Unified color pallet from light orange to dark red was used in all graphs and on the map. Darker colors represent higher numbers
 - Fatalities and injuries: Light pink represent the fatalities and light beige represents the injuries.
