@@ -50,7 +50,8 @@ In this context, we have transformed the dashboard into accommodately the need o
 
 ### Visual Encoding and Interaction Design <a name="visual-encoding-and-interaction-design"></a>
 
-The dashboard mainly consist of 5 visuals. Each visual is explained in detail below.
+The dashboard mainly consist of 5 visuals. Each visual is explained in detail below. We definetely know that each visual should have the labels for x-axis and y-axis but we have decided not adding the label of x-axis for 'Fatalities and Injured' line chart on Globe page, because the spaces around the chart should be aligned and while implementing the label, it doesn't give a aesthetic look, that is why we removed it. In addition to that, color scales would be added to World Map, we have implemented it and saw, it is not responsive for all devices, therefore it was removed.
+
 
 **Representations:**
 
