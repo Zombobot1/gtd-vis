@@ -54,7 +54,8 @@ In this context, we have transformed the dashboard into accommodately the need o
 The dashboard mainly consist of 5 visuals. Each visual is explained in detail below.
 
 **Representations:**
-- Attack numbers - Worldwide map 
+
+- Attack numbers - Worldwide map:
     - Shows yearly statistics by countries on number of incidents, killed and wounded people.
     - Number of incidents  is encoded with the colors from light orange to dark red.
 - Fatalities and Injuries - Line charts:
@@ -65,24 +66,29 @@ The dashboard mainly consist of 5 visuals. Each visual is explained in detail be
     - Shows all time percentages of attacks by the type of attack.
 - Top 5 terrorist groups according to number of attacks - Stacked line chart:
     - Shows the attack numbers over time for top 5 group.
-    - 
+
+
 **Use of timeline:**
 
-    - Timeline was used to show dynamics of the measures for all visuals excluding Attack Type pie chart.
+Timeline was used to show dynamics of the measures for all visuals excluding Attack Type pie chart.
     
 **Color encoding:**
 
 Generally, we have avoid to use red and green colors together to the users who can be color-blind. Due to the perception of topic, we decided to apply predominantly dark red in background and coherent colors.
-    - World map: Unified color pallet from light orange to dark red was used in all graphs and on the map. Darker colors represent higher numbers
-    - Fatalities and injuries: Light pink represent the fatalities and light beige represents the injuries.
-    - Attack type: Basically used only 4 colors to show the share of the most occured attack types for global and country selection.
-    - Most attacked countries over the time: Light beige represents affiliated, orange represents unknown groups who carried out the attacks.
-    - Top 5 terrorist groups according to number of attacks: Top 5 terrorist groups is represented with light beige to dark red colors.
+
+- World map: Unified color pallet from light orange to dark red was used in all graphs and on the map. Darker colors represent higher numbers
+- Fatalities and injuries: Light pink represent the fatalities and light beige represents the injuries.
+- Attack type: Basically used only 4 colors to show the share of the most occured attack types for global and country selection.
+- Most attacked countries over the time: Light beige represents affiliated, orange represents unknown groups who carried out the attacks.
+- Top 5 terrorist groups according to number of attacks: Top 5 terrorist groups is represented with light beige to dark red colors.
     
  The globe page of dashboard is built in showing the values based on interaction. Interactive world map allow the users,
-    - hover on countries and check the details of number of killed, injured, events
-    - rotate and zoom in/out the globe to choose the country in order to inspect the 'Fatalieties and Injured', 'Attack Type' visuals and overall statistics  at the left-hand side of dashboard.
+ 
+- hover over countries and check the details of number of killed, injured, events
+- rotate and zoom in/out the globe to choose the country in order to inspect the 'Fatalieties and Injured', 'Attack Type' visuals and overall statistics  at the left-hand side of dashboard.
+
 The most attacked countries over time chart in detail section enables the users to choose the interested year to inspect most attacked countries for selected year.
+
 Top 5 terrorist groups according to number of attacks is used for analyzing the values of each groups hovered over year.
 
 ### Algorithm Design <a name="algorithm-design"></a>
