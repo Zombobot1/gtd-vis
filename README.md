@@ -10,7 +10,6 @@
 - [Running the Application](#running-the-application)
 - [Screencast](#screencast)
 - [Authors](#authors)
-- [References](#references)
 
 
 ## Introduction <a name="introduction"></a>
