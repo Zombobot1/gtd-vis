@@ -91,6 +91,8 @@ The most attacked countries over time chart in detail section enables the users 
 
 Top 5 terrorist groups according to number of attacks is used for analyzing the values of each groups hovered over year.
 
+Additionally, the dashboard has a "About" page to give the users detailed definitions that are used in the visuals.
+
 ### Algorithm Design <a name="algorithm-design"></a>
 
 This project represents a visualization of data from a large dataset of terrorist attacks from 1977 to 2019 (over 200,000 rows and over 70 columns).
