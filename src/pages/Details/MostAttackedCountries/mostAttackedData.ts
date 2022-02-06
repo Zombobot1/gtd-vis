@@ -1,1 +1,110 @@
-export const mostAttackedData = [{"year": 2011, "data": [{"id": "THA", "affiliated": 17, "unknown": 159}, {"id": "SOM", "affiliated": 129, "unknown": 47}, {"id": "RUS", "affiliated": 18, "unknown": 166}, {"id": "AFG", "affiliated": 213, "unknown": 164}, {"id": "IND", "affiliated": 483, "unknown": 109}, {"id": "PAK", "affiliated": 218, "unknown": 704}, {"id": "IRQ", "affiliated": 71, "unknown": 1156}]}, {"year": 2012, "data": [{"id": "YEM", "affiliated": 142, "unknown": 64}, {"id": "THA", "affiliated": 69, "unknown": 142}, {"id": "NGA", "affiliated": 396, "unknown": 164}, {"id": "IND", "affiliated": 347, "unknown": 224}, {"id": "AFG", "affiliated": 616, "unknown": 425}, {"id": "IRQ", "affiliated": 288, "unknown": 975}, {"id": "PAK", "affiliated": 292, "unknown": 1134}]}, {"year": 2013, "data": [{"id": "NGA", "affiliated": 238, "unknown": 79}, {"id": "THA", "affiliated": 67, "unknown": 277}, {"id": "PHL", "affiliated": 200, "unknown": 296}, {"id": "IND", "affiliated": 414, "unknown": 219}, {"id": "AFG", "affiliated": 655, "unknown": 496}, {"id": "PAK", "affiliated": 287, "unknown": 1668}, {"id": "IRQ", "affiliated": 409, "unknown": 2096}]}, {"year": 2014, "data": [{"id": "LBY", "affiliated": 140, "unknown": 403}, {"id": "YEM", "affiliated": 340, "unknown": 204}, {"id": "NGA", "affiliated": 569, "unknown": 94}, {"id": "IND", "affiliated": 509, "unknown": 254}, {"id": "AFG", "affiliated": 904, "unknown": 694}, {"id": "PAK", "affiliated": 403, "unknown": 1423}, {"id": "IRQ", "affiliated": 999, "unknown": 2372}]}, {"year": 2015, "data": [{"id": "EGY", "affiliated": 177, "unknown": 362}, {"id": "NGA", "affiliated": 470, "unknown": 120}, {"id": "YEM", "affiliated": 524, "unknown": 74}, {"id": "IND", "affiliated": 526, "unknown": 274}, {"id": "PAK", "affiliated": 295, "unknown": 720}, {"id": "AFG", "affiliated": 1154, "unknown": 564}, {"id": "IRQ", "affiliated": 788, "unknown": 1632}]}, {"year": 2016, "data": [{"id": "NGA", "affiliated": 364, "unknown": 106}, {"id": "PHL", "affiliated": 209, "unknown": 275}, {"id": "YEM", "affiliated": 544, "unknown": 104}, {"id": "PAK", "affiliated": 226, "unknown": 512}, {"id": "IND", "affiliated": 521, "unknown": 408}, {"id": "AFG", "affiliated": 905, "unknown": 439}, {"id": "IRQ", "affiliated": 1025, "unknown": 1977}]}, {"year": 2017, "data": [{"id": "YEM", "affiliated": 319, "unknown": 57}, {"id": "NGA", "affiliated": 312, "unknown": 105}, {"id": "PHL", "affiliated": 354, "unknown": 135}, {"id": "PAK", "affiliated": 166, "unknown": 410}, {"id": "IND", "affiliated": 559, "unknown": 308}, {"id": "AFG", "affiliated": 815, "unknown": 356}, {"id": "IRQ", "affiliated": 837, "unknown": 1182}]}, {"year": 2018, "data": [{"id": "YEM", "affiliated": 232, "unknown": 104}, {"id": "PAK", "affiliated": 115, "unknown": 254}, {"id": "PHL", "affiliated": 265, "unknown": 159}, {"id": "NGA", "affiliated": 454, "unknown": 111}, {"id": "IND", "affiliated": 449, "unknown": 301}, {"id": "IRQ", "affiliated": 515, "unknown": 616}, {"id": "AFG", "affiliated": 1071, "unknown": 372}]}, {"year": 2019, "data": [{"id": "PAK", "affiliated": 67, "unknown": 212}, {"id": "PHL", "affiliated": 175, "unknown": 175}, {"id": "NGA", "affiliated": 312, "unknown": 99}, {"id": "IRQ", "affiliated": 278, "unknown": 217}, {"id": "IND", "affiliated": 327, "unknown": 231}, {"id": "YEM", "affiliated": 472, "unknown": 90}, {"id": "AFG", "affiliated": 1082, "unknown": 340}]}]
+export const mostAttackedData = [
+  {
+    year: 2011,
+    data: [
+      { id: 'THA', Affiliated: 17, Unknown: 159 },
+      { id: 'SOM', Affiliated: 129, Unknown: 47 },
+      { id: 'RUS', Affiliated: 18, Unknown: 166 },
+      { id: 'AFG', Affiliated: 213, Unknown: 164 },
+      { id: 'IND', Affiliated: 483, Unknown: 109 },
+      { id: 'PAK', Affiliated: 218, Unknown: 704 },
+      { id: 'IRQ', Affiliated: 71, Unknown: 1156 },
+    ],
+  },
+  {
+    year: 2012,
+    data: [
+      { id: 'YEM', Affiliated: 142, Unknown: 64 },
+      { id: 'THA', Affiliated: 69, Unknown: 142 },
+      { id: 'NGA', Affiliated: 396, Unknown: 164 },
+      { id: 'IND', Affiliated: 347, Unknown: 224 },
+      { id: 'AFG', Affiliated: 616, Unknown: 425 },
+      { id: 'IRQ', Affiliated: 288, Unknown: 975 },
+      { id: 'PAK', Affiliated: 292, Unknown: 1134 },
+    ],
+  },
+  {
+    year: 2013,
+    data: [
+      { id: 'NGA', Affiliated: 238, Unknown: 79 },
+      { id: 'THA', Affiliated: 67, Unknown: 277 },
+      { id: 'PHL', Affiliated: 200, Unknown: 296 },
+      { id: 'IND', Affiliated: 414, Unknown: 219 },
+      { id: 'AFG', Affiliated: 655, Unknown: 496 },
+      { id: 'PAK', Affiliated: 287, Unknown: 1668 },
+      { id: 'IRQ', Affiliated: 409, Unknown: 2096 },
+    ],
+  },
+  {
+    year: 2014,
+    data: [
+      { id: 'LBY', Affiliated: 140, Unknown: 403 },
+      { id: 'YEM', Affiliated: 340, Unknown: 204 },
+      { id: 'NGA', Affiliated: 569, Unknown: 94 },
+      { id: 'IND', Affiliated: 509, Unknown: 254 },
+      { id: 'AFG', Affiliated: 904, Unknown: 694 },
+      { id: 'PAK', Affiliated: 403, Unknown: 1423 },
+      { id: 'IRQ', Affiliated: 999, Unknown: 2372 },
+    ],
+  },
+  {
+    year: 2015,
+    data: [
+      { id: 'EGY', Affiliated: 177, Unknown: 362 },
+      { id: 'NGA', Affiliated: 470, Unknown: 120 },
+      { id: 'YEM', Affiliated: 524, Unknown: 74 },
+      { id: 'IND', Affiliated: 526, Unknown: 274 },
+      { id: 'PAK', Affiliated: 295, Unknown: 720 },
+      { id: 'AFG', Affiliated: 1154, Unknown: 564 },
+      { id: 'IRQ', Affiliated: 788, Unknown: 1632 },
+    ],
+  },
+  {
+    year: 2016,
+    data: [
+      { id: 'NGA', Affiliated: 364, Unknown: 106 },
+      { id: 'PHL', Affiliated: 209, Unknown: 275 },
+      { id: 'YEM', Affiliated: 544, Unknown: 104 },
+      { id: 'PAK', Affiliated: 226, Unknown: 512 },
+      { id: 'IND', Affiliated: 521, Unknown: 408 },
+      { id: 'AFG', Affiliated: 905, Unknown: 439 },
+      { id: 'IRQ', Affiliated: 1025, Unknown: 1977 },
+    ],
+  },
+  {
+    year: 2017,
+    data: [
+      { id: 'YEM', Affiliated: 319, Unknown: 57 },
+      { id: 'NGA', Affiliated: 312, Unknown: 105 },
+      { id: 'PHL', Affiliated: 354, Unknown: 135 },
+      { id: 'PAK', Affiliated: 166, Unknown: 410 },
+      { id: 'IND', Affiliated: 559, Unknown: 308 },
+      { id: 'AFG', Affiliated: 815, Unknown: 356 },
+      { id: 'IRQ', Affiliated: 837, Unknown: 1182 },
+    ],
+  },
+  {
+    year: 2018,
+    data: [
+      { id: 'YEM', Affiliated: 232, Unknown: 104 },
+      { id: 'PAK', Affiliated: 115, Unknown: 254 },
+      { id: 'PHL', Affiliated: 265, Unknown: 159 },
+      { id: 'NGA', Affiliated: 454, Unknown: 111 },
+      { id: 'IND', Affiliated: 449, Unknown: 301 },
+      { id: 'IRQ', Affiliated: 515, Unknown: 616 },
+      { id: 'AFG', Affiliated: 1071, Unknown: 372 },
+    ],
+  },
+  {
+    year: 2019,
+    data: [
+      { id: 'PAK', Affiliated: 67, Unknown: 212 },
+      { id: 'PHL', Affiliated: 175, Unknown: 175 },
+      { id: 'NGA', Affiliated: 312, Unknown: 99 },
+      { id: 'IRQ', Affiliated: 278, Unknown: 217 },
+      { id: 'IND', Affiliated: 327, Unknown: 231 },
+      { id: 'YEM', Affiliated: 472, Unknown: 90 },
+      { id: 'AFG', Affiliated: 1082, Unknown: 340 },
+    ],
+  },
+]

@@ -44,8 +44,6 @@ export function Globe({ showAboutS }: Globe) {
     if (prevIsPlaying === false && isPlaying) setCurrentYearI(0)
   }, [isPlaying, prevIsPlaying])
 
-  gen()
-
   useInterval(
     () => {
       setCurrentYearI((old) => {
@@ -73,15 +71,14 @@ export function Globe({ showAboutS }: Globe) {
   const rightDrawerS = useState(false)
   const countryData = worldMapData.find((d) => d.id === country)
 
-  const op = useState(false)
-  const s = op[0] ? { transform: 'translate(10px, 10px) rotate(90deg)' } : {}
+  const [isFullScale, setIsFullScale] = useState(true)
 
   return (
     <>
       <div>
         {mobile && (
           <>
-            <Drawer side="left" openS={leftDrawerS} showBtn={!rightDrawerS[0]}>
+            <Drawer side="left" openS={leftDrawerS} showBtn={!rightDrawerS[0]} country={country}>
               <div className="counters-panel">
                 <h3>{countryName}</h3>
                 <GlobeCounters
@@ -100,11 +97,10 @@ export function Globe({ showAboutS }: Globe) {
                 <Btn
                   text={showAttacks ? 'Show Victims' : 'Show Attacks'}
                   onClick={() => setShowVictims((old) => !old)}
-                  width={230}
                 />
               </div>
             </Drawer>
-            <Drawer side="right" openS={rightDrawerS} showBtn={!leftDrawerS[0]}>
+            <Drawer side="right" openS={rightDrawerS} showBtn={!leftDrawerS[0]} country={country}>
               <div className="plots-panel">
                 <h3>{countryName}</h3>
                 <div className="line-card line-card-top">
@@ -119,14 +115,12 @@ export function Globe({ showAboutS }: Globe) {
         )}
         <div className="globe">
           <h2 className="globe-header">{country === '' ? 'Globe' : countryName}</h2>
-          <AnimatePresence>
-            {country && (
-              <div className="back-to-globe" onClick={() => setCountry('')}>
-                <ArrowLeftI />
-                <p className="back-to-globe-text">back to globe</p>
-              </div>
-            )}
-          </AnimatePresence>
+          {country && (
+            <div className="back-to-globe" onClick={() => setCountry('')}>
+              <ArrowLeftI />
+              <p className="back-to-globe-text">back to globe</p>
+            </div>
+          )}
 
           {!mobile && (
             <div className="zoom-info" style={{ opacity: hovered ? 1 : 0 }}>
@@ -137,7 +131,7 @@ export function Globe({ showAboutS }: Globe) {
 
           <EarthWrapper>
             <div className={!mobile ? 'c-m' : ''}>
-              <div className="c-i" ref={ref}>
+              <div className="c-i" ref={ref} style={{ overflow: isFullScale ? 'visible' : 'hidden' }}>
                 <motion.div
                   className="core"
                   initial={{ opacity: 0 }}
@@ -151,6 +145,7 @@ export function Globe({ showAboutS }: Globe) {
                       setCountry(c)
                     }}
                     data={worldMapData}
+                    setIsFullScale={setIsFullScale}
                   />
                 </motion.div>
               </div>
@@ -172,7 +167,6 @@ export function Globe({ showAboutS }: Globe) {
                 <Btn
                   text={showAttacks ? 'Show Victims' : 'Show Attacks'}
                   onClick={() => setShowVictims((old) => !old)}
-                  width={230}
                 />
               </motion.div>
             </div>
@@ -233,7 +227,7 @@ function EarthWrapper({ children }: EarthWrapper) {
   )
 }
 
-function getAttacksInfo(country: string) {
+export function getAttacksInfo(country: string) {
   const data = attacksData.find((d) => d.id === country)!.data
   const unknown = data.find((d) => d.id === 'unknown')!.data
   const affiliated = data.find((d) => d.id === 'affiliated')!.data
@@ -244,7 +238,7 @@ function getAttacksInfo(country: string) {
   return { total, unknown: unknownCount, affiliated: affiliatedCount }
 }
 
-function getInjuriesInfo(country: string) {
+export function getInjuriesInfo(country: string) {
   const data = victimsData.find((d) => d.id === country)!.data
   const injuries = data.find((d) => d.id === 'injuries')!.data
   const fatalities = data.find((d) => d.id === 'fatalities')!.data

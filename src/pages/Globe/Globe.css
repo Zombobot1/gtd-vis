@@ -112,10 +112,9 @@
 
 .zoom-info {
   position: absolute;
-  left: 25%;
-  top: 10%;
+  left: 20%;
+  bottom: 20%;
   color: #da8181;
-  opacity: 0;
   z-index: 100;
   transition: opacity 250ms ease-in-out;
 }
@@ -187,8 +186,6 @@
 
   width: 70%;
   height: 70%;
-
-  overflow: hidden;
 
   background-color: #180000;
 }

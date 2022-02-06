@@ -25,7 +25,7 @@ export function Details({ showAboutS }: Details) {
         {!mobile && <Nav absolute={false} showAboutS={showAboutS} />}
       </motion.div>
       <motion.div className="first-detailed-chart" variants={ch1V} initial="from" animate="to">
-        <h3>Most attacked countries over the time</h3>
+        <h3>Most attacked countries</h3>
         <MostAttackedCountries />
       </motion.div>
       <motion.div
@@ -35,7 +35,7 @@ export function Details({ showAboutS }: Details) {
         initial="from"
         animate="to"
       >
-        <h3>Most influential terrorist organizations</h3>
+        <h3>Top 5 terrorist groups according to number of attacks</h3>
         <TerroristGroups />
       </motion.div>
       <a className="with-luv" href="https://www.fu-berlin.de/en/index.html" target="_blank">

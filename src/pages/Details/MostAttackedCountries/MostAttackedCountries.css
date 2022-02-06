@@ -2,3 +2,19 @@
   width: 100%;
   height: 22rem;
 }
+
+.bar-tooltip {
+  background-color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: #000;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.bar-tooltip > .circle {
+  height: 16px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}

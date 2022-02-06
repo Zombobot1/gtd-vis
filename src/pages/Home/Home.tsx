@@ -80,13 +80,31 @@ export function Home({ showAboutS, isEarthVisibleS }: Home) {
         <motion.div initial="from" animate="to" exit="from" variants={mainV} className="hero">
           <h1>Explore Terrorist Activity</h1>
           <p className="text">Get insights from the data to help policy makers with choosing optimal countermeasures</p>
-          {!mobile && <Btn className="cta" text="Explore data" onClick={() => navigate('globe')} width={270} />}
+          {!mobile && (
+            <div className="ctas">
+              <Btn className="cta" text="Explore data" onClick={() => navigate('globe')} />
+              <div
+                className="link underline"
+                onClick={() => window.open(location.pathname + 'presentation', '_blank')?.focus()}
+              >
+                Presentation
+              </div>
+            </div>
+          )}
         </motion.div>
       </main>
 
       {mobile && (
         <motion.div initial="from" animate="to" exit="from" variants={mainV} className="hero">
-          <Btn className="cta" text="Explore data" onClick={() => navigate('globe')} width={270} />
+          <div className="ctas">
+            <Btn className="cta" text="Explore data" onClick={() => navigate('globe')} />
+            <div
+              className="link underline presentation-link"
+              onClick={() => window.open(location.pathname + 'presentation', '_blank')?.focus()}
+            >
+              Presentation
+            </div>
+          </div>
         </motion.div>
       )}
       {mobile && <Nav showAboutS={showAboutS} />}
@@ -94,7 +112,7 @@ export function Home({ showAboutS, isEarthVisibleS }: Home) {
   )
 }
 
-function createEarth(id: string, onReady: () => void) {
+export function createEarth(id: string, onReady: () => void) {
   const sprites = [] as any[]
   const earth = new Earth(id, {
     location: { lat: 30, lng: 80 },

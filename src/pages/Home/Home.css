@@ -51,12 +51,12 @@
 .navigation {
   display: flex;
   gap: 3rem;
-  font-size: 1.25rem;
-  text-transform: uppercase;
 }
 
 .link {
   cursor: pointer;
+  font-size: 1.25rem;
+  text-transform: uppercase;
 }
 
 .link.active {
@@ -106,7 +106,13 @@ main {
   gap: 3rem;
 }
 
-h1 {
+@media screen and (max-width: 600px) {
+  .hero {
+    gap: 2.5rem;
+  }
+}
+
+.home h1 {
   /* calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]))) */
   font-size: calc(32px + (72 - 32) * ((100vw - 600px) / (1920 - 600)));
   /* font-size: 4.5rem; - 72px */
@@ -118,18 +124,34 @@ h1 {
   font-size: calc(22px + (32 - 22) * ((100vw - 600px) / (1920 - 600)));
 }
 
+.ctas {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
 .cta {
   width: 15rem;
   z-index: 1;
 }
 
 @media screen and (max-width: 600px) {
-  .cta {
+  .ctas {
     position: relative;
-    width: 10rem;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     margin-bottom: auto;
     margin-left: 2rem;
+    gap: 1.5rem;
+  }
+  .cta {
+    padding: 1rem;
+
+    width: 10rem;
+  }
+
+  .presentation-link {
+    font-size: 1rem;
   }
 }
 

@@ -1,17 +1,44 @@
 .btn {
   background-color: unset;
-  border: unset;
+  border: 1px solid #cc3535;
+  border-radius: 1rem;
   cursor: pointer;
   padding: 1rem;
-  border-radius: 1rem;
-  border: 1px solid #cc3535;
   transition: background-color 100ms ease-in-out;
   color: #cc3535;
   font-size: 1rem;
   text-transform: uppercase;
   -webkit-tap-highlight-color: transparent;
+
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn:hover {
+  color: #180000;
+}
+
+.btn::after {
+  content: '';
+  background: #cc3535;
+  position: absolute;
+  z-index: -1;
+  padding: 0.85rem 0.75rem;
+  display: block;
+  transition: all 0.3s ease;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+}
+
+.btn:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
 }
 
 .btn:active {
-  background-color: rgba(204, 53, 53, 0.1);
+  opacity: 0.8;
 }

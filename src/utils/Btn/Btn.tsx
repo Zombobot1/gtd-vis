@@ -4,26 +4,15 @@ import './Btn.css'
 export interface Btn {
   text: string
   onClick: () => void
-  width: number
   className?: string
 }
 
-export function Btn({ text, width, onClick, className = '' }: Btn) {
-  const btnV = {
-    hover: {
-      width,
-    },
-  }
+export function Btn({ text, onClick, className = '' }: Btn) {
   return (
-    <motion.button
-      className={'btn ' + className}
-      onClick={onClick}
-      initial="from"
-      whileHover="hover"
-      whileTap="tap"
-      variants={btnV}
-    >
-      {text}
-    </motion.button>
+    <div className="wrapper">
+      <button className={'btn ' + className} onClick={onClick}>
+        {text}
+      </button>
+    </div>
   )
 }

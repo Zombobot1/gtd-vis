@@ -9,12 +9,13 @@ import { motion } from 'framer-motion'
 
 export interface Drawer {
   children: ReactNode
+  country: string
   side: 'left' | 'right'
   showBtn: boolean
   openS: State<boolean>
 }
 
-export function Drawer({ children, side, openS, showBtn }: Drawer) {
+export function Drawer({ children, side, openS, showBtn, country }: Drawer) {
   const [open, setOpen] = openS
   const right = side === 'right'
 
@@ -37,7 +38,7 @@ export function Drawer({ children, side, openS, showBtn }: Drawer) {
                 onClick={() => setOpen((o) => !o)}
                 style={!showBtn ? { display: 'none' } : {}}
               >
-                <Rotate>
+                <Rotate key={country}>
                   {open && right && <ChevronI style={{ transform: 'translate(2px, 3px)' }} />}
                   {open && !right && <ChevronBI style={{ transform: 'translate(-2px, 3px)' }} />}
                 </Rotate>
@@ -49,7 +50,7 @@ export function Drawer({ children, side, openS, showBtn }: Drawer) {
                 onClick={() => setOpen((o) => !o)}
                 style={!showBtn ? { display: 'none' } : {}}
               >
-                <Rotate>
+                <Rotate key={country}>
                   {!open && right && <CurveI style={{ width: '24px', transform: 'translate(-2px, 2px)' }} />}
                   {!open && !right && <HistI style={{ width: '24px', transform: 'translate(2px, 2px)' }} />}
                 </Rotate>

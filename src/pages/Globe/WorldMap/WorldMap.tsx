@@ -1,4 +1,4 @@
-import { ResponsiveChoroplethCanvas, ResponsiveChoropleth } from '@nivo/geo'
+import { ResponsiveChoroplethCanvas, ResponsiveChoropleth, ChoroplethCanvasProps } from '@nivo/geo'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { clamp, debounce, DivRef, equalNum, reverse, throttle } from '../../../utils'
 import './WorldMap.css'
@@ -9,6 +9,7 @@ import useWindowSize from '../../../utils/hooks/useWindowSize'
 import { useIsMobile } from '../../../utils/hooks/useIsMobile'
 import { useGesture } from '@use-gesture/react'
 import { countryMapping } from '../data/countryMapping'
+import { useUpdateEffect } from '../../../utils/hooks/useUpdateEffect'
 
 type Data = {
   id: string
@@ -20,19 +21,34 @@ type Data = {
 export interface WorldMap {
   data: Data
   onCountryClick: (country: string) => void
+  ignoreDeltas?: boolean
+  scaleBy?: number
+  setIsFullScale?: (v: boolean) => void
 }
 
-export function WorldMap({ data, onCountryClick }: WorldMap) {
+export function WorldMap({ data, onCountryClick, ignoreDeltas, scaleBy, setIsFullScale }: WorldMap) {
   const ref = useRef<HTMLDivElement>(null)
   const { width, height } = useWindowSize()
   const { lambda, phi, scale } = useGestureTransformations(ref)
 
+  useUpdateEffect(() => {
+    setIsFullScale?.(equalNum(scale, SCALE))
+  }, [scale])
+
   let scaleDelta = height >= 1080 ? HIGH_SCREEN_DELTA : 0
   if (width <= 600) scaleDelta = MOBILE_SCREEN_DELTA
+  if (ignoreDeltas) scaleDelta = 0
+  if (scaleBy) scaleDelta = scaleBy
+
+  // svg causes bug on rotation in safari
+  // canvas causes tooltip to unpleasantly jump
+  const Root = (width <= 600
+    ? ResponsiveChoroplethCanvas
+    : ResponsiveChoropleth) as unknown as React.ComponentClass<ChoroplethCanvasProps>
 
   return (
     <div className="map" ref={ref}>
-      <ResponsiveChoroplethCanvas // svg causes bug on rotation in safari
+      <Root
         data={data}
         features={geoFeatures.features} // https://geojson-maps.ash.ms/
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
@@ -45,7 +61,7 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
         projectionRotation={[lambda, phi, 0]}
         projectionScale={width * (scale + scaleDelta)}
         borderWidth={0.5}
-        borderColor="#152538"
+        borderColor="#180000"
         onClick={(e) => onCountryClick(e.data.id)}
         tooltip={(e) => {
           return (
@@ -63,7 +79,7 @@ export function WorldMap({ data, onCountryClick }: WorldMap) {
     </div>
   )
 }
-const SCALE = 0.205 // 0.2135 .9 * .65 * .7 / 2
+const SCALE = 0.205 // 0.2135 .9 * .65 * .7 / 2 # 2 - magic number
 const HIGH_SCREEN_DELTA = 0.27 - SCALE
 const MOBILE_SCREEN_DELTA = 0.437 - SCALE
 const MAX_SCALE = 0.5
@@ -78,8 +94,8 @@ function useGestureTransformations(ref: DivRef) {
     throttle(({ offset: [dx, dy] }: Drag) => {
       setDragged((old) => {
         if (!old.active) return old
-        const lambda = clamp(old.lambda + (dx - old.dx) / 4, -180, 180)
-        const phi = clamp(old.phi - (dy - old.dy) / 8, -90, 90)
+        const lambda = old.lambda + (dx - old.dx) / 4
+        const phi = old.phi - (dy - old.dy) / 8
         return { ...old, lambda, phi, dx, dy }
       })
     }, 10),
@@ -152,7 +168,7 @@ function Tooltip({ id, color, country, killed, value, wounded }: TooltipP) {
           </tbody>
         </table>
       )}
-      {!country && <p>No data available</p>}
+      {!country && <div>No data available</div>}
     </div>
   )
 }

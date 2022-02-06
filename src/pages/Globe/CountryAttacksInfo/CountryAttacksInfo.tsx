@@ -20,7 +20,7 @@ function AttacksChart({ data: initialData, legends, globeShown }: AttacksChart_)
 
   return (
     <div className="line">
-      <p className="y-label">Count {globeShown ? '(in T)' : ''}</p>
+      <div className="y-label">Count {globeShown ? '(in T)' : ''}</div>
       <ResponsiveLine
         data={data}
         colors={[colorMap.lightRed, colorMap.lightYellow]}

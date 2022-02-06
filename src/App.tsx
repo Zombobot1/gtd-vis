@@ -26,6 +26,7 @@ import useWindowSize from './utils/hooks/useWindowSize'
 import { useIsMobile } from './utils/hooks/useIsMobile'
 import { Nav } from './utils/Nav/Nav'
 import { About } from './pages/About/About'
+import { Presentation } from './pages/Presentation/Presentation'
 
 function App_() {
   const location = useLocation()
@@ -55,7 +56,6 @@ function App_() {
           <Route path="details" element={<Details showAboutS={showAboutS} />} />
         </Routes>
       </div>
-      {/* <div>{mobile && <Nav showAboutS={showAboutS} />}</div> */}
     </>
   )
 }
@@ -63,7 +63,10 @@ function App_() {
 function App() {
   return (
     <BrowserRouter basename="/gtd-vis/">
-      <App_ />
+      <Routes>
+        <Route path="presentation" element={<Presentation />} />
+        <Route path="*" element={<App_ />} />
+      </Routes>
     </BrowserRouter>
   )
 }

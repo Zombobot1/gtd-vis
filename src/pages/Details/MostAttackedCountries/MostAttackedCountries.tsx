@@ -5,6 +5,7 @@ import { mostAttackedData } from './mostAttackedData'
 import { Slider } from '../../../utils/Slider/Slider'
 import { colorMap, theme } from '../../../theme'
 import { useIsMobile } from '../../../utils/hooks/useIsMobile'
+import { countryMapping } from '../../Globe/data/countryMapping'
 
 export function MostAttackedCountries() {
   const years = mostAttackedData.map((d) => d.year)
@@ -20,9 +21,9 @@ export function MostAttackedCountries() {
         data={data}
         theme={mobile ? theme : bigTheme}
         colors={[colorMap.lightYellow, colorMap.orange]}
-        keys={['affiliated', 'unknown']}
+        keys={['Affiliated', 'Unknown']}
         indexBy="id"
-        margin={{ top: 35, right: mobile ? 10 : 30, bottom: 80, left: mobile ? 35 : 80 }}
+        margin={{ top: 35, right: mobile ? 10 : 30, bottom: 80, left: mobile ? 35 : 81 }}
         borderRadius={4}
         innerPadding={4}
         padding={0.3}
@@ -77,6 +78,16 @@ export function MostAttackedCountries() {
             symbolShape: 'circle',
           },
         ]}
+        tooltip={(d) => {
+          return (
+            <div className="bar-tooltip">
+              <span className="circle" style={{ backgroundColor: d.color }} />
+              {`${(countryMapping as any)[d.indexValue]}`}
+              <i>- {d.id}: </i>
+              <b>{d.value}</b>
+            </div>
+          )
+        }}
       />
       <div>
         <Slider points={years} currentIndexS={[currentYearI, setCurrentYearI]} />
