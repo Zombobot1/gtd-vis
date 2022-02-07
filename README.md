@@ -117,10 +117,10 @@ The project is currently deployed to [Github Pages](https://zombobot1.github.io/
 
 ## Screencast <a name="screencast"></a>
 
-The screencast of the project is accessible over the [the screencast link](https://youtu.be/VyhLRJVoIrI) given below.
+The screencast of the project is accessible over the [the screencast link](https://youtu.be/OEYIg2CmD7U) given below.
 
-<a href="https://youtu.be/VyhLRJVoIrI" target="_blank"> 
-    <img src="https://img.youtube.com/vi/VyhLRJVoIrI/hqdefault.jpg" alt="Screencast - GTD Data Visualization" width="240" height="180" border="10" />
+<a href="https://youtu.be/OEYIg2CmD7U" target="_blank"> 
+    <img src="https://i.ytimg.com/vi/OEYIg2CmD7U/hqdefault.jpg" alt="Screencast - GTD Data Visualization" width="240" height="180" border="10" />
 </a>
 
 ## Authors <a name="authors"></a>
